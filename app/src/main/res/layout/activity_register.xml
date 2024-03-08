@@ -43,7 +43,7 @@
 
 <androidx.cardview.widget.CardView
     android:layout_width="350dp"
-    android:layout_height="400dp"
+    android:layout_height="500dp"
     android:layout_marginStart="30dp"
     android:layout_marginTop="20dp"
     android:layout_marginEnd="31dp"
@@ -58,7 +58,7 @@
       android:background="@drawable/background_field_rounded">
 
     <EditText
-        android:id="@+id/etLoginEmail"
+        android:id="@+id/etRegisterEmail"
         android:layout_width="270dp"
         android:layout_height="55dp"
         android:layout_marginStart="41dp"
@@ -72,31 +72,59 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etLoginPassword"
+        android:id="@+id/etRegisterPass1"
         android:layout_width="270dp"
         android:layout_height="55dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="40dp"
         android:ems="10"
         android:hint="Your password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLoginEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/etRegisterEmail" />
+
+    <EditText
+        android:id="@+id/etRegisterPass2"
+        android:layout_width="270dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="40dp"
+        android:ems="10"
+        android:hint="Repeat your password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etRegisterPass1" />
 
     <Button
-        android:id="@+id/button"
-        android:background="@drawable/button_background"
+        android:id="@+id/registerButton"
         android:layout_width="142dp"
         android:layout_height="71dp"
         android:layout_marginStart="104dp"
-        android:layout_marginTop="91dp"
         android:layout_marginEnd="104dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
         android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Switch
+        android:id="@+id/switchTermsConditions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="61dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="61dp"
+        android:text="I accept term and conditions."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etLoginPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/etRegisterPass2" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
