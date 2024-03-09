@@ -8,6 +8,7 @@ import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 
 class LoginActivity : AppCompatActivity() {
@@ -17,6 +18,12 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         setupRegisterLink()
+        val loginButton = findViewById<Button>(R.id.btnLogin)
+
+        loginButton.setOnClickListener {
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     /**
