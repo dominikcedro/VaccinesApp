@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/logoFragment"
-        android:name="com.example.vaccineapp.startup.LogoFragment"
+        android:name="com.example.vaccineapp.fragments.LogoFragment"
         tools:layout="@layout/fragment_logo">
         <action
             android:id="@+id/action_logoFragment_to_loginFragment"
@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.vaccineapp.startup.LoginFragment"
+        android:name="com.example.vaccineapp.fragments.LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.vaccineapp.startup.RegisterFragment"
+        android:name="com.example.vaccineapp.fragments.RegisterFragment"
         tools:layout="@layout/fragment_register">
     </fragment>
 

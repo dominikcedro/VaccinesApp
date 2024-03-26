@@ -1,4 +1,4 @@
-package com.example.vaccineapp
+package com.example.vaccineapp.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
