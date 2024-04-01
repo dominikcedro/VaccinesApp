@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    kotlin("plugin.serialization") version "1.9.21"
 }
 android {
     namespace = "com.example.vaccineapp"
@@ -43,6 +44,10 @@ dependencies {
     implementation("io.ktor:ktor-client-android:2.3.9")
     implementation("io.ktor:ktor-client-json:2.3.9")
     implementation("io.ktor:ktor-client-serialization:2.3.9")
+    implementation("com.google.android.datatransport:transport-runtime:3.3.0")
+    runtimeOnly("io.ktor:ktor-client-logging-jvm:2.3.9")
+    implementation("io.ktor:ktor-client-logging:2.3.7")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.7")
 
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

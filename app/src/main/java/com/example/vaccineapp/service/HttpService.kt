@@ -1,6 +1,7 @@
-import com.example.vaccineapp.models.AuthenticationRequest
-import com.example.vaccineapp.models.AuthenticationResponse
-import com.example.vaccineapp.models.RegistrationRequest
+import com.example.vaccineapp.auth.AuthenticationRequest
+import com.example.vaccineapp.auth.AuthenticationResponse
+import com.example.vaccineapp.auth.RegistrationRequest
+
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -10,7 +11,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class HttpService(private val noAuthHttpClient: HttpClient, private val defaultHttpClient: HttpClient) {
-    private val usersServiceUrl = "http://backend-users???"
+    private val usersServiceUrl = "http://localhost:8080/users"
 
     suspend fun login(authenticationRequest: AuthenticationRequest): AuthenticationResponse {
         val url = "$usersServiceUrl/auth/login"
@@ -21,7 +22,7 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
             setBody(TextContent(jsonPayload, ContentType.Application.Json))
         }
 
-        return Json.decodeFromString(response.bodyAsText())
+        return Json.decodeFromString(AuthenticationResponse.serializer(), response.bodyAsText())
     }
 
     suspend fun register(registrationRequest: RegistrationRequest): AuthenticationResponse {
@@ -33,7 +34,7 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
             setBody(TextContent(jsonPayload, ContentType.Application.Json))
         }
 
-        return Json.decodeFromString(response.bodyAsText())
+        return Json.decodeFromString(AuthenticationResponse.serializer(), response.bodyAsText())
     }
 
 }
