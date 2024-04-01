@@ -13,15 +13,6 @@ import io.ktor.client.plugins.kotlinx.serializer.KotlinxSerializer
 import kotlinx.serialization.json.Json
 
 class LoginFragment : Fragment() {
-
-//    private val httpClient = HttpClient(Android) {
-//        install(JsonPlugin) {
-//            serializer = KotlinxSerializer(Json {
-//                ignoreUnknownKeys = true
-//            })
-//        }
-//    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -20,12 +20,29 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.vaccineapp.fragments.RegisterFragment"
         tools:layout="@layout/fragment_register">
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainMenuFragment"
+        android:name="com.example.vaccineapp.fragments.MainMenuFragment"
+        tools:layout="@layout/fragment_main_menu">
+        <action
+            android:id="@+id/action_loginFragment_to_userVaccinesFragment"
+            app:destination="@id/userVaccinesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userVaccinesFragment"
+        android:name="com.example.vaccineapp.fragments.UserVaccinesFragment"
+        tools:layout="@layout/fragment_user_vaccines">
     </fragment>
 
 </navigation>
