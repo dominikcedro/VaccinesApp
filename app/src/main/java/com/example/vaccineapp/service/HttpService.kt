@@ -1,8 +1,10 @@
 import com.example.vaccineapp.auth.AuthenticationRequest
 import com.example.vaccineapp.auth.AuthenticationResponse
 import com.example.vaccineapp.auth.RegistrationRequest
+import com.mwdziak.fitness_mobile_client.auth.LogoutRequest
 
 import io.ktor.client.*
+import io.ktor.client.call.body
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
@@ -13,16 +15,15 @@ import kotlinx.serialization.json.Json
 class HttpService(private val noAuthHttpClient: HttpClient, private val defaultHttpClient: HttpClient) {
     private val usersServiceUrl = "http://localhost:8080"
 
-    suspend fun login(authenticationRequest: AuthenticationRequest): AuthenticationResponse {
+    suspend fun authenticate(authenticationRequest: AuthenticationRequest): AuthenticationResponse {
         val url = "$usersServiceUrl/auth/login"
 
         val response: HttpResponse = noAuthHttpClient.post(url) {
             contentType(ContentType.Application.Json)
-            val jsonPayload = Json.encodeToString(authenticationRequest)
-            setBody(TextContent(jsonPayload, ContentType.Application.Json))
+            setBody(authenticationRequest)
         }
 
-        return Json.decodeFromString(AuthenticationResponse.serializer(), response.bodyAsText())
+        return response.body<AuthenticationResponse>()
     }
 
     suspend fun register(registrationRequest: RegistrationRequest): AuthenticationResponse {
@@ -30,11 +31,19 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
 
         val response: HttpResponse = noAuthHttpClient.post(url) {
             contentType(ContentType.Application.Json)
-            val jsonPayload = Json.encodeToString(registrationRequest)
-            setBody(TextContent(jsonPayload, ContentType.Application.Json))
+            setBody(registrationRequest)
         }
 
-        return Json.decodeFromString(AuthenticationResponse.serializer(), response.bodyAsText())
+        return response.body<AuthenticationResponse>()
+    }
+
+    suspend fun logout(logoutRequest: LogoutRequest): HttpResponse {
+        val url = "$usersServiceUrl/auth/logout"
+        val response = noAuthHttpClient.post(url) {
+            contentType(ContentType.Application.Json)
+            setBody(logoutRequest)
+        }
+        return response
     }
 
 }
