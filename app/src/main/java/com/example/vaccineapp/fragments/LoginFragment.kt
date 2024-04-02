@@ -1,88 +1,89 @@
 package com.example.vaccineapp.fragments
 
-import HttpService
-import android.content.Context
+
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
+import com.example.vaccineapp.databinding.FragmentLoginBinding
+import com.example.vaccineapp.utils.hideKeyboard
+import com.example.vaccineapp.utils.showSnackBar
+import com.mwdziak.fitness_mobile_client.viewmodel.LoginViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.vaccineapp.R
-import com.example.vaccineapp.auth.AuthenticationRequest
-import com.google.android.datatransport.runtime.logging.Logging
-import io.ktor.client.*
-import io.ktor.client.engine.android.*
-import io.ktor.client.*
-import io.ktor.client.plugins.logging.LogLevel
-import io.ktor.client.plugins.logging.Logger
 
+class LoginFragment : Fragment() {
+    private val viewModel: LoginViewModel by viewModel()
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
 
-
-
-
-import io.ktor.client.plugins.json.JsonPlugin
-import io.ktor.client.plugins.kotlinx.serializer.KotlinxSerializer
-import io.ktor.client.plugins.logging.DEFAULT
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-
-class LoginFragment : Fragment(R.layout.fragment_login) {
-    private lateinit var httpService: HttpService
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val emailEditText = view.findViewById<EditText>(R.id.etLoginEmail)
-        val passwordEditText = view.findViewById<EditText>(R.id.etLoginPassword)
-        val loginButton = view.findViewById<Button>(R.id.btnLogin)
 
-        val noAuthHttpClient = HttpClient(Android) {
-            install(JsonPlugin) {
-                serializer = KotlinxSerializer()
-            }
+        if (viewModel.isUserLoggedIn()) {
+            //TODO
         }
 
-        val defaultHttpClient = HttpClient(Android) {
-            install(JsonPlugin) {
-                serializer = KotlinxSerializer()
-            }
-            // Here you can add an interceptor to add the authentication token to each request
+        binding.tvGoRegister.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
-        httpService = HttpService(noAuthHttpClient, defaultHttpClient)
 
-        loginButton.setOnClickListener {
-            val email = emailEditText.text.toString()
-            val password = passwordEditText.text.toString()
+        binding.etLoginEmail.addTextChangedListener { text ->
+            viewModel.updateEmail(text.toString())
+        }
 
-            val authenticationRequest = AuthenticationRequest(email, password)
+        binding.etLoginPassword.addTextChangedListener { text ->
+            viewModel.updatePassword(text.toString())
+        }
 
-            CoroutineScope(Dispatchers.IO).launch {
-                val response = httpService.login(authenticationRequest)
+        binding.btnLogin.setOnClickListener {
+            viewModel.authenticate()
+            hideKeyboard(it)
+        }
 
-                // Get the token, refreshToken, and expirationDate from the response
-                val token = response.token
-                val refreshToken = response.refreshToken
-                val expirationDate = response.expirationDate
-
-                // Store these values somewhere safe
-                // For example, in shared preferences
-                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return@launch
-                with(sharedPref.edit()) {
-                    putString("token", token)
-                    putString("refreshToken", refreshToken)
-                    putString("expirationDate", expirationDate)
-                    apply()
+        viewModel.authenticationState.observe(viewLifecycleOwner) { authenticationState ->
+            when (authenticationState) {
+                LoginViewModel.AuthenticationState.LOADING -> {
+                    binding.btnLogin.isEnabled = false
                 }
 
-                // Navigate to another screen
-                // For example, to a HomeFragment
-                withContext(Dispatchers.Main) {
-                    findNavController().navigate(R.id.action_loginFragment_to_mainMenuFragment)
+                LoginViewModel.AuthenticationState.AUTHENTICATED -> {
+                    binding.btnLogin.isEnabled = true
+                    //TODO
+                }
+
+                LoginViewModel.AuthenticationState.FAILED -> {
+                    binding.btnLogin.isEnabled = true
+                }
+                null -> {
+                    binding.btnLogin.isEnabled = true
                 }
             }
         }
+        viewModel.exceptionMessage.observe(viewLifecycleOwner) { message ->
+            if (!message.isNullOrEmpty()) {
+                showSnackBar(message, true)
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+    companion object {
+        fun newInstance() = LoginFragment()
     }
 }
