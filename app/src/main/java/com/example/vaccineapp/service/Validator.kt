@@ -1,4 +1,4 @@
-package com.mwdziak.fitness_mobile_client.service
+package com.example.vaccineapp.service
 
 import android.util.Patterns
 

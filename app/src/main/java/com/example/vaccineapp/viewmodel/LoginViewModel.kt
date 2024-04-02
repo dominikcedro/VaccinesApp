@@ -1,10 +1,11 @@
-package com.mwdziak.fitness_mobile_client.viewmodel
+package com.example.vaccineapp.viewmodel
 
 import HttpService
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mwdziak.fitness_mobile_client.service.TokenManager
+import com.example.vaccineapp.auth.AuthenticationRequest
+import com.example.vaccineapp.service.TokenManager
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val tokenManager: TokenManager, private val httpService: HttpService) : ViewModel() {

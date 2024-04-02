@@ -11,9 +11,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.vaccineapp.databinding.FragmentLoginBinding
 import com.example.vaccineapp.utils.hideKeyboard
 import com.example.vaccineapp.utils.showSnackBar
-import com.mwdziak.fitness_mobile_client.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.vaccineapp.R
+import com.example.vaccineapp.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
     private val viewModel: LoginViewModel by viewModel()
