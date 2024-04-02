@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.vaccineapp.service.TokenManager
 import com.example.vaccineapp.service.Validator
+import com.example.vaccineapp.viewmodel.LoginViewModel
+import com.example.vaccineapp.viewmodel.RegisterViewModel
 import com.mwdziak.fitness_mobile_client.dto.ErrorResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -109,5 +111,6 @@ val serviceModule = module {
 }
 
 val viewModelModule = module {
-
+    single { LoginViewModel(get(), get()) }
+    single { RegisterViewModel(get(), get(), get()) }
 }
