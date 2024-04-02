@@ -1,17 +1,16 @@
 package com.example.vaccineapp.utils
 
 import HttpService
-import com.mwdziak.fitness_mobile_client.service.Validator
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.vaccineapp.service.TokenManager
+import com.example.vaccineapp.service.Validator
 import com.mwdziak.fitness_mobile_client.dto.ErrorResponse
-import com.mwdziak.fitness_mobile_client.service.TokenManager
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.ClientRequestException
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.plugins.auth.Auth
