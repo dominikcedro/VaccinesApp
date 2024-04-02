@@ -11,7 +11,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class HttpService(private val noAuthHttpClient: HttpClient, private val defaultHttpClient: HttpClient) {
-    private val usersServiceUrl = "http://localhost:8080/users"
+    private val usersServiceUrl = "http://localhost:8080"
 
     suspend fun login(authenticationRequest: AuthenticationRequest): AuthenticationResponse {
         val url = "$usersServiceUrl/auth/login"

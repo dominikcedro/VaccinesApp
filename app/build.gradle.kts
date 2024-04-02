@@ -40,14 +40,16 @@ android {
 
 dependencies {
     //Ktor client
-    implementation("io.ktor:ktor-client-core:2.3.9")
-    implementation("io.ktor:ktor-client-android:2.3.9")
-    implementation("io.ktor:ktor-client-json:2.3.9")
-    implementation("io.ktor:ktor-client-serialization:2.3.9")
-    implementation("com.google.android.datatransport:transport-runtime:3.3.0")
-    runtimeOnly("io.ktor:ktor-client-logging-jvm:2.3.9")
+    implementation("io.ktor:ktor-client-android:2.3.7")
+    implementation("io.ktor:ktor-client-json:2.3.7")
+    implementation("io.ktor:ktor-client-serialization:2.3.7")
+    implementation("io.ktor:ktor-client-auth:2.3.7")
     implementation("io.ktor:ktor-client-logging:2.3.7")
     implementation("io.ktor:ktor-client-content-negotiation:2.3.7")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.7")
+
+    implementation("com.google.android.datatransport:transport-runtime:3.3.0")
+
 
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -60,5 +62,7 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    implementation("io.insert-koin:koin-android:3.1.2")
 
 }
