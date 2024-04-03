@@ -9,9 +9,6 @@ import io.ktor.client.call.body
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import io.ktor.http.content.TextContent
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 class HttpService(private val noAuthHttpClient: HttpClient, private val defaultHttpClient: HttpClient) {
     private val usersServiceUrl = "http://localhost:8080"
@@ -47,7 +44,7 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
         return response
     }
 
-    suspend fun updateNotificicationToken(token: String) {
+    suspend fun updateNotificationToken(token: String) {
         val url = "$usersServiceUrl/users/notification-token"
         val response = defaultHttpClient.post(url) {
             contentType(ContentType.Application.Json)

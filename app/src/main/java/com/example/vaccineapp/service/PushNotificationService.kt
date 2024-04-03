@@ -12,7 +12,7 @@ class PushNotificationService(private val httpService: HttpService): FirebaseMes
         super.onNewToken(token)
 
         GlobalScope.launch {
-            httpService.updateNotificicationToken(token)
+            httpService.updateNotificationToken(token)
         }
     }
 }
