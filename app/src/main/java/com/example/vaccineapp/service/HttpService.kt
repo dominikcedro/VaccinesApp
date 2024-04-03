@@ -11,7 +11,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 
 class HttpService(private val noAuthHttpClient: HttpClient, private val defaultHttpClient: HttpClient) {
-    private val usersServiceUrl = "http://localhost:8080"
+    private val usersServiceUrl = "10.0.2.2:8080"
 
     suspend fun authenticate(authenticationRequest: AuthenticationRequest): AuthenticationResponse {
         val url = "$usersServiceUrl/auth/login"
