@@ -1,5 +1,6 @@
 import com.example.vaccineapp.auth.AuthenticationRequest
 import com.example.vaccineapp.auth.AuthenticationResponse
+import com.example.vaccineapp.auth.NotificationTokenRequest
 import com.example.vaccineapp.auth.RegistrationRequest
 import com.mwdziak.fitness_mobile_client.auth.LogoutRequest
 
@@ -44,6 +45,14 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
             setBody(logoutRequest)
         }
         return response
+    }
+
+    suspend fun updateNotificicationToken(token: String) {
+        val url = "$usersServiceUrl/users/notification-token"
+        val response = defaultHttpClient.post(url) {
+            contentType(ContentType.Application.Json)
+            setBody(NotificationTokenRequest(token))
+        }
     }
 
 }
