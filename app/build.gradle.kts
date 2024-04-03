@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("plugin.serialization") version "1.9.21"
-    id("com.google.gms.google-services")
 }
 android {
     namespace = "com.example.vaccineapp"
@@ -46,7 +45,6 @@ dependencies {
     implementation("io.ktor:ktor-client-json:2.3.9")
     implementation("io.ktor:ktor-client-serialization:2.3.9")
     implementation("com.google.android.datatransport:transport-runtime:3.3.0")
-    implementation("com.google.firebase:firebase-messaging:23.4.1")
     runtimeOnly("io.ktor:ktor-client-logging-jvm:2.3.9")
     implementation("io.ktor:ktor-client-logging:2.3.7")
     implementation("io.ktor:ktor-client-content-negotiation:2.3.7")
