@@ -4,6 +4,7 @@
 
     <application
         android:name=".MyApplication"
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -31,7 +32,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <service
-            android:name=".service.PushNotificationService"
+            android:name=".service.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action

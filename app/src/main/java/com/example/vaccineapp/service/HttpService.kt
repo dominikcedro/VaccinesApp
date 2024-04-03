@@ -11,7 +11,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 
 class HttpService(private val noAuthHttpClient: HttpClient, private val defaultHttpClient: HttpClient) {
-    private val usersServiceUrl = "10.0.2.2:8080"
+    private val usersServiceUrl = "https://lasting-honeybee-thankful.ngrok-free.app"
 
     suspend fun authenticate(authenticationRequest: AuthenticationRequest): AuthenticationResponse {
         val url = "$usersServiceUrl/auth/login"
@@ -45,7 +45,7 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
     }
 
     suspend fun updateNotificationToken(token: String) {
-        val url = "$usersServiceUrl/users/notification-token"
+        val url = "$usersServiceUrl/user/notification-token"
         val response = defaultHttpClient.post(url) {
             contentType(ContentType.Application.Json)
             setBody(NotificationTokenRequest(token))

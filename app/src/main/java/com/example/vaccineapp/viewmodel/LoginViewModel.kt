@@ -1,12 +1,16 @@
 package com.example.vaccineapp.viewmodel
 
 import HttpService
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vaccineapp.auth.AuthenticationRequest
 import com.example.vaccineapp.service.TokenManager
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class LoginViewModel(private val tokenManager: TokenManager, private val httpService: HttpService) : ViewModel() {
     private val email = MutableLiveData<String>("")
@@ -37,6 +41,21 @@ class LoginViewModel(private val tokenManager: TokenManager, private val httpSer
                 authenticationState.value = AuthenticationState.FAILED
             }
         }
+    }
+
+    fun updateNotificationToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("Login Fragment", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            val token = task.result
+            runBlocking {
+                httpService.updateNotificationToken(token)
+            }
+        })
+
     }
 
     fun isUserLoggedIn(): Boolean {

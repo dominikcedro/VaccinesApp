@@ -68,4 +68,6 @@ dependencies {
 
     implementation("io.insert-koin:koin-android:3.1.2")
 
+    implementation("ch.qos.logback:logback-classic:1.2.9")
+
 }

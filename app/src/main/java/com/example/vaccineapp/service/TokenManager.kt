@@ -24,8 +24,9 @@ class TokenManager(private val httpClient: HttpClient, private val sharedPrefere
     }
 
     fun parseDate(date: String): Date? {
+        val replacedDate = date.replace("CEST", "GMT+2:00")
         val format = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US)
-        return format.parse(date)
+        return format.parse(replacedDate)
     }
 
     fun isRefreshTokenExpired(): Boolean {
@@ -63,5 +64,6 @@ class TokenManager(private val httpClient: HttpClient, private val sharedPrefere
         val newTokens: AuthenticationResponse = response.body()
         saveTokens(newTokens.token, newTokens.refreshToken, newTokens.expirationDate)
     }
+
 }
 

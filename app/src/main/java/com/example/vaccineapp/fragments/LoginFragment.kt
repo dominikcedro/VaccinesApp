@@ -3,6 +3,7 @@ package com.example.vaccineapp.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,7 +36,9 @@ class LoginFragment : Fragment() {
 
 
         if (viewModel.isUserLoggedIn()) {
-            //TODO
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
         }
 
         binding.tvGoRegister.setOnClickListener {
@@ -63,6 +66,7 @@ class LoginFragment : Fragment() {
 
                 LoginViewModel.AuthenticationState.AUTHENTICATED -> {
                     binding.btnLogin.isEnabled = true
+                    viewModel.updateNotificationToken()
                     val intent = Intent(requireContext(), MainActivity::class.java)
                     startActivity(intent)
                     activity?.finish()

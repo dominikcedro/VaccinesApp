@@ -4,6 +4,7 @@ import HttpService
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.vaccineapp.service.MyFirebaseMessagingService
 import com.example.vaccineapp.service.TokenManager
 import com.example.vaccineapp.service.Validator
 import com.example.vaccineapp.viewmodel.LoginViewModel
@@ -108,6 +109,7 @@ val serviceModule = module {
     single<SharedPreferences> {
         androidContext().getSharedPreferences("com.mwdziak.fitness_mobile_client", Context.MODE_PRIVATE)
     }
+    single { MyFirebaseMessagingService() }
 }
 
 val viewModelModule = module {
