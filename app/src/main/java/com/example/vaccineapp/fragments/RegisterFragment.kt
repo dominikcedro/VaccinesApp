@@ -1,5 +1,6 @@
 package com.example.vaccineapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.vaccineapp.R
+import com.example.vaccineapp.activity.MainActivity
 import com.example.vaccineapp.databinding.FragmentRegisterBinding
 import com.example.vaccineapp.utils.hideKeyboard
 import com.example.vaccineapp.utils.showSnackBar
@@ -78,7 +80,9 @@ class RegisterFragment : Fragment() {
 
                 RegisterViewModel.AuthenticationState.AUTHENTICATED -> {
                     binding.registerButton.isEnabled = true
-                    //TODO
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
                 }
 
                 RegisterViewModel.AuthenticationState.FAILED -> {

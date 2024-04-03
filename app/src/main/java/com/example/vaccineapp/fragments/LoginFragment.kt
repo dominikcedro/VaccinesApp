@@ -1,6 +1,7 @@
 package com.example.vaccineapp.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.example.vaccineapp.utils.hideKeyboard
 import com.example.vaccineapp.utils.showSnackBar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.vaccineapp.R
+import com.example.vaccineapp.activity.MainActivity
 import com.example.vaccineapp.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
@@ -61,7 +63,9 @@ class LoginFragment : Fragment() {
 
                 LoginViewModel.AuthenticationState.AUTHENTICATED -> {
                     binding.btnLogin.isEnabled = true
-                    //TODO
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
                 }
 
                 LoginViewModel.AuthenticationState.FAILED -> {
