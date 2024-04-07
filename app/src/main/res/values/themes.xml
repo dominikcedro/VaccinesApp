@@ -33,4 +33,9 @@
         <item name="colorAccent">@color/primaryColor</item>
     </style>
 
+    <style name="DatePickerTheme" parent="Theme.VaccineApp">
+        <item name="colorAccent">@color/black</item> <!-- Selected day color -->
+        <item name="android:textColorPrimary">@color/black</item> <!-- Text color -->
+    </style>
+
 </resources>
