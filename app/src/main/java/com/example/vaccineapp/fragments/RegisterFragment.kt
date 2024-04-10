@@ -71,6 +71,9 @@ class RegisterFragment : Fragment() {
             viewModel.register()
             hideKeyboard(it)
         }
+        binding.tvGoLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
 
         viewModel.authenticationState.observe(viewLifecycleOwner) { authenticationState ->
             when (authenticationState) {

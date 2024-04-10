@@ -50,7 +50,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.7")
 
     implementation("com.google.android.datatransport:transport-runtime:3.3.0")
-
+    implementation("com.google.android.material:material:1.11.0")
 
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
