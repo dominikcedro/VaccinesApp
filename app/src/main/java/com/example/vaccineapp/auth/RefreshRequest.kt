@@ -1,4 +1,4 @@
-package com.mwdziak.fitness_mobile_client.auth
+package com.example.vaccineapp.auth
 
 import kotlinx.serialization.Serializable
 

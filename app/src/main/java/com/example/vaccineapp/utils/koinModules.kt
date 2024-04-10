@@ -9,7 +9,7 @@ import com.example.vaccineapp.service.TokenManager
 import com.example.vaccineapp.service.Validator
 import com.example.vaccineapp.viewmodel.LoginViewModel
 import com.example.vaccineapp.viewmodel.RegisterViewModel
-import com.mwdziak.fitness_mobile_client.dto.ErrorResponse
+import com.example.vaccineapp.auth.ErrorResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.android.Android

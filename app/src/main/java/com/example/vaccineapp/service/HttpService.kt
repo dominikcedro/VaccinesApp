@@ -2,7 +2,7 @@ import com.example.vaccineapp.auth.AuthenticationRequest
 import com.example.vaccineapp.auth.AuthenticationResponse
 import com.example.vaccineapp.auth.NotificationTokenRequest
 import com.example.vaccineapp.auth.RegistrationRequest
-import com.mwdziak.fitness_mobile_client.auth.LogoutRequest
+import com.example.vaccineapp.auth.LogoutRequest
 
 import io.ktor.client.*
 import io.ktor.client.call.body

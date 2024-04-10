@@ -2,7 +2,7 @@ package com.example.vaccineapp.service
 
 import android.content.SharedPreferences
 import com.example.vaccineapp.auth.AuthenticationResponse
-import com.mwdziak.fitness_mobile_client.auth.RefreshRequest
+import com.example.vaccineapp.auth.RefreshRequest
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post
