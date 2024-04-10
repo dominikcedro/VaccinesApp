@@ -29,6 +29,9 @@
         android:id="@+id/registerFragment"
         android:name="com.example.vaccineapp.fragments.RegisterFragment"
         tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 
     <fragment
@@ -38,11 +41,38 @@
         <action
             android:id="@+id/action_loginFragment_to_userVaccinesFragment"
             app:destination="@id/userVaccinesFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_addVaccineFragment"
+            app:destination="@id/addVaccineFragment" />
     </fragment>
     <fragment
         android:id="@+id/userVaccinesFragment"
         android:name="com.example.vaccineapp.fragments.UserVaccinesFragment"
         tools:layout="@layout/fragment_user_vaccines">
+    </fragment>
+
+    <fragment
+        android:id="@+id/addVaccineFragment"
+        android:name="com.example.vaccineapp.fragments.AddVaccineFragment"
+        tools:layout="@layout/fragment_add_vaccine">
+        <action
+            android:id="@+id/action_addVaccineFragment_to_datePickFragment"
+            app:destination="@id/datePickFragment" />
+        <action
+            android:id="@+id/action_addVaccineFragment_to_listOfVaccinesFragment"
+            app:destination="@id/listOfVaccinesFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/datePickFragment"
+        android:name="com.example.vaccineapp.fragments.DatePickFragment"
+        tools:layout="@layout/fragment_date_pick">
+    </fragment>
+    <fragment
+        android:id="@+id/listOfVaccinesFragment"
+        android:name="com.example.vaccineapp.fragments.ListOfVaccinesFragment"
+        tools:layout="@layout/fragment_list_of_vaccines">
     </fragment>
 
 </navigation>
