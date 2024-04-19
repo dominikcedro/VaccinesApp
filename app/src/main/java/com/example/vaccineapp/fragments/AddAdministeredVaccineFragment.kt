@@ -2,21 +2,19 @@ package com.example.vaccineapp.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.vaccineapp.R
-import com.example.vaccineapp.fragments.DatePickFragment
 
-class AddVaccineFragment : Fragment() {
+class AddAdministeredVaccineFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_add_vaccine, container, false)
+        return inflater.inflate(R.layout.fragment_add_administered_vaccine, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -53,8 +53,8 @@
 
     <fragment
         android:id="@+id/addVaccineFragment"
-        android:name="com.example.vaccineapp.fragments.AddVaccineFragment"
-        tools:layout="@layout/fragment_add_vaccine">
+        android:name="com.example.vaccineapp.fragments.AddAdministeredVaccineFragment"
+        tools:layout="@layout/fragment_add_administered_vaccine">
         <action
             android:id="@+id/action_addVaccineFragment_to_datePickFragment"
             app:destination="@id/datePickFragment" />
