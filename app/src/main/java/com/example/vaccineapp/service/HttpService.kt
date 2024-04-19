@@ -3,6 +3,7 @@ import com.example.vaccineapp.auth.AuthenticationResponse
 import com.example.vaccineapp.auth.NotificationTokenRequest
 import com.example.vaccineapp.auth.RegistrationRequest
 import com.example.vaccineapp.auth.LogoutRequest
+import com.example.vaccineapp.domain.AdministeredVaccinePostRequest
 import com.example.vaccineapp.domain.Vaccine
 
 import io.ktor.client.*
@@ -57,6 +58,14 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
         val url = "$usersServiceUrl/vaccine/recommended"
         val response = defaultHttpClient.get(url)
         return response.body<List<Vaccine>>()
+    }
+
+    suspend fun addAdministeredVaccine(administeredVaccinePostRequest: AdministeredVaccinePostRequest) {
+        val url = "$usersServiceUrl/vaccination/administered"
+        defaultHttpClient.post(url) {
+            contentType(ContentType.Application.Json)
+            setBody(administeredVaccinePostRequest)
+        }
     }
 
 }

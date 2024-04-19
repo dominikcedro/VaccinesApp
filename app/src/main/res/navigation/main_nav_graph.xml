@@ -9,7 +9,12 @@
         android:id="@+id/addAdministeredVaccineFragment"
         android:name="com.example.vaccineapp.fragments.AddAdministeredVaccineFragment"
         tools:layout="@layout/fragment_add_administered_vaccine"
-        android:label="AddAdministeredVaccineFragment" />
+        android:label="AddAdministeredVaccineFragment" >
+        <action
+            android:id="@+id/action_addAdministeredVaccineFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/mainMenuFragment"
         android:name="com.example.vaccineapp.fragments.MainMenuFragment"
