@@ -13,9 +13,9 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddAdministeredVaccineFragment : Fragment() {
+    private val viewModel: AddAdministeredVaccinationViewModel by viewModel()
     private var _binding: FragmentAddAdministeredVaccineBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: AddAdministeredVaccinationViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
