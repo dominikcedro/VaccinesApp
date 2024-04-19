@@ -83,7 +83,7 @@ class AddAdministeredVaccineFragment : Fragment() {
 
         binding.btnSubmit.setOnClickListener {
             viewModel.postVaccination()
-            findNavController().navigate(R.id.action_addAdministeredVaccineFragment_to_mainMenuFragment)
+            findNavController().navigate(R.id.action_addAdministeredVaccineFragment_to_administeredVaccinationsFragment)
         }
 
     }

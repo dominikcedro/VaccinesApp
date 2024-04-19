@@ -3,6 +3,7 @@ import com.example.vaccineapp.auth.AuthenticationResponse
 import com.example.vaccineapp.auth.NotificationTokenRequest
 import com.example.vaccineapp.auth.RegistrationRequest
 import com.example.vaccineapp.auth.LogoutRequest
+import com.example.vaccineapp.domain.AdministeredVaccinationGetRequest
 import com.example.vaccineapp.domain.AdministeredVaccinePostRequest
 import com.example.vaccineapp.domain.Vaccine
 
@@ -66,6 +67,12 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
             contentType(ContentType.Application.Json)
             setBody(administeredVaccinePostRequest)
         }
+    }
+
+    suspend fun fetchAdministeredVaccines(): List<AdministeredVaccinationGetRequest> {
+        val url = "$usersServiceUrl/vaccination/administered/user"
+        val response = defaultHttpClient.get(url)
+        return response.body<List<AdministeredVaccinationGetRequest>>()
     }
 
 }
