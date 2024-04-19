@@ -12,6 +12,7 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="login_info">Please login to continue</string>
+    <string name="go_login_text">Already have an account? Please login here.</string>
     <string name="register_info">No account? Please register here.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

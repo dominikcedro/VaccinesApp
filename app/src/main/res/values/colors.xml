@@ -15,4 +15,7 @@
     <color name="fieldColor">#DBE2EF</color>
     <color name="backgroundColor">#F9F7F7</color>
 
+    <color name="snackBarSuccessful">#7CB342</color>
+    <color name="snackBarError">#E53935</color>
+
 </resources>
