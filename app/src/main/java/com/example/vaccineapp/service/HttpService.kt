@@ -3,6 +3,7 @@ import com.example.vaccineapp.auth.AuthenticationResponse
 import com.example.vaccineapp.auth.NotificationTokenRequest
 import com.example.vaccineapp.auth.RegistrationRequest
 import com.example.vaccineapp.auth.LogoutRequest
+import com.example.vaccineapp.domain.Vaccine
 
 import io.ktor.client.*
 import io.ktor.client.call.body
@@ -50,6 +51,12 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
             contentType(ContentType.Application.Json)
             setBody(NotificationTokenRequest(token))
         }
+    }
+
+    suspend fun fetchVaccines(): List<Vaccine> {
+        val url = "$usersServiceUrl/vaccine/recommended"
+        val response = defaultHttpClient.get(url)
+        return response.body<List<Vaccine>>()
     }
 
 }
