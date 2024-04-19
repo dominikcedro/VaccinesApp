@@ -7,6 +7,6 @@ data class Vaccine(
     val id: Long,
     val name: String,
     val recommendedAgeMonthsLowerBound: Int,
-    val recommendedAgeMonthsUpperBound: Int,
+    val recommendedAgeMonthsUpperBound: Int?,
     val doses: List<Dose>
 )

@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class Dose(
     val id: Long,
     val doseNumber: Int,
-    val monthsAfterPreviousDose: Int
+    val monthsAfterPreviousDose: Int?
 )
