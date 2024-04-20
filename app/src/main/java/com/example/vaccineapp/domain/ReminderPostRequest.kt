@@ -5,5 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 
 data class ReminderPostRequest(
-    private val dateTime: String,
-)
+    var dateTime: String,
+) {
+    constructor(): this("")
+}

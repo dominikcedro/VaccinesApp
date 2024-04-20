@@ -10,7 +10,7 @@ import com.example.vaccineapp.domain.Vaccine
 
 class AddScheduledVaccinationViewModel(private val httpService: HttpService) : ViewModel() {
     private var headerText = "Schedule first dose"
-    private val reminder = mutableListOf<ReminderPostRequest>()
+    private val reminders = mutableListOf<ReminderPostRequest>()
     private val recommendedVaccines = mutableListOf<Vaccine>()
     private val vaccines = mutableListOf<Vaccine>()
     private val alreadyScheduledVaccinations = mutableListOf<ScheduledVaccinationGetRequest>()
@@ -23,7 +23,7 @@ class AddScheduledVaccinationViewModel(private val httpService: HttpService) : V
         recommendedVaccines.addAll(httpService.fetchRecommendedVaccines())
     }
 
-    suspend fun fetchAdministeredVaccinations() {
+    suspend fun fetchScheduledVaccinations() {
         alreadyScheduledVaccinations.clear()
         alreadyScheduledVaccinations.addAll(httpService.fetchScheduledVaccines())
     }
@@ -41,5 +41,9 @@ class AddScheduledVaccinationViewModel(private val httpService: HttpService) : V
     }
     fun setChosenDate(date: String) {
         chosenDate.value = date
+    }
+
+    fun addReminder(reminder: ReminderPostRequest) {
+        this.reminders.add(reminder)
     }
 }
