@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.vaccineapp.R
 import com.example.vaccineapp.databinding.FragmentAddAdministeredVaccineBinding
+import com.example.vaccineapp.utils.showSnackBar
 import com.example.vaccineapp.viewmodel.AddAdministeredVaccinationViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -46,6 +47,7 @@ class AddAdministeredVaccineFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             initDropdownMenu()
+            viewModel.fetchAdministeredVaccinations()
         }
 
         binding.chooseVaccineTextView.setOnItemClickListener { _, _, position, _ ->
@@ -58,7 +60,6 @@ class AddAdministeredVaccineFragment : Fragment() {
             datePicker.addOnPositiveButtonClickListener { selectedDate ->
                 val date = ofEpochMilli(selectedDate).atZone(ZoneId.systemDefault()).toLocalDate()
                 val dateString = date.toString()
-                Log.d("AddAdministeredVaccineFragment", "Date: $dateString")
                 viewModel.setChosenDate(dateString)
                 binding.pickDate.setText(dateString)
             }
@@ -83,6 +84,12 @@ class AddAdministeredVaccineFragment : Fragment() {
         }
 
         binding.btnSubmit.setOnClickListener {
+            if (!viewModel.isVaccinationNonExisting()) {
+                showSnackBar("Vaccination already exists", true)
+            }
+            if (!viewModel.areAllFieldsValid()) {
+                showSnackBar("Please fill in all fields", true)
+            }
             viewModel.postVaccination()
             findNavController().navigate(R.id.action_addAdministeredVaccineFragment_to_administeredVaccinationsFragment)
         }
