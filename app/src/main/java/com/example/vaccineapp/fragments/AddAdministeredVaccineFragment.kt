@@ -86,9 +86,11 @@ class AddAdministeredVaccineFragment : Fragment() {
         binding.btnSubmit.setOnClickListener {
             if (!viewModel.isVaccinationNonExisting()) {
                 showSnackBar("Vaccination already exists", true)
+                return@setOnClickListener
             }
             if (!viewModel.areAllFieldsValid()) {
                 showSnackBar("Please fill in all fields", true)
+                return@setOnClickListener
             }
             viewModel.postVaccination()
             findNavController().navigate(R.id.action_addAdministeredVaccineFragment_to_administeredVaccinationsFragment)
