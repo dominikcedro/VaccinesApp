@@ -56,7 +56,7 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
     }
 
     suspend fun fetchVaccines(): List<Vaccine> {
-        val url = "$usersServiceUrl/vaccine/recommended"
+        val url = "$usersServiceUrl/vaccine"
         val response = defaultHttpClient.get(url)
         return response.body<List<Vaccine>>()
     }
