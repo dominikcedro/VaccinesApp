@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vaccineapp.R
 import com.example.vaccineapp.databinding.FragmentAddAdministeredVaccineBinding
 import com.example.vaccineapp.databinding.FragmentAdministeredVaccinationsBinding
@@ -35,6 +36,8 @@ class AdministeredVaccinationsFragment : Fragment() {
             val adapter = AdministeredVaccinationAdapter(viewModel.administeredVaccinations.toTypedArray())
             binding.administeredVaccinationsRV.adapter = adapter
         }
+        val layoutManager = LinearLayoutManager(context)
+        binding.administeredVaccinationsRV.layoutManager = layoutManager
     }
 
 }
