@@ -57,6 +57,10 @@ class AddAdministeredVaccinationViewModel(private val httpService: HttpService):
         return chosenVaccineIndex.value != null && chosenTime.value != null && chosenDate.value != null && doseNumber.value != null
     }
 
+    fun isDoseNumberValidForChosenVaccine(): Boolean {
+        return doseNumber.value!! <= vaccines[chosenVaccineIndex.value!!].doses.size
+    }
+
     fun postVaccination() {
         viewModelScope.launch {
             val vaccineId = vaccines[chosenVaccineIndex.value!!].id

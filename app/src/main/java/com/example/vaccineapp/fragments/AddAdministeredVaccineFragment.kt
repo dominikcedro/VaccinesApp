@@ -92,6 +92,10 @@ class AddAdministeredVaccineFragment : Fragment() {
                 showSnackBar("Please fill in all fields", true)
                 return@setOnClickListener
             }
+            if (!viewModel.isDoseNumberValidForChosenVaccine()) {
+                showSnackBar("Invalid dose number", true)
+                return@setOnClickListener
+            }
             viewModel.postVaccination()
             findNavController().navigate(R.id.action_addAdministeredVaccineFragment_to_administeredVaccinationsFragment)
         }
