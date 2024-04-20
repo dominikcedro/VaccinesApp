@@ -1,5 +1,6 @@
 package com.example.vaccineapp.fragments
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -39,6 +40,7 @@ class AddAdministeredVaccineFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,33 +53,32 @@ class AddAdministeredVaccineFragment : Fragment() {
         }
 
 
-        binding.pickDate.editText?.setOnClickListener {
+        binding.pickDate.setOnClickListener {
             val datePicker = MaterialDatePicker.Builder.datePicker().build()
             datePicker.addOnPositiveButtonClickListener { selectedDate ->
                 val date = ofEpochMilli(selectedDate).atZone(ZoneId.systemDefault()).toLocalDate()
                 val dateString = date.toString()
                 Log.d("AddAdministeredVaccineFragment", "Date: $dateString")
                 viewModel.setChosenDate(dateString)
-                binding.pickDate.editText?.setText(dateString)
+                binding.pickDate.setText(dateString)
             }
             datePicker.show(childFragmentManager, "date_picker")
         }
 
-        binding.pickHour.editText?.setOnClickListener {
+        binding.pickTime.setOnClickListener {
             val timePicker = MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_24H).build()
             timePicker.addOnPositiveButtonClickListener {
                 val hour = String.format("%02d", timePicker.hour)
                 val minute = String.format("%02d", timePicker.minute)
                 viewModel.setChosenTime("$hour:$minute")
-                binding.pickHour.editText?.setText("$hour:$minute")
+                binding.pickTime.setText("$hour:$minute")
             }
             timePicker.show(childFragmentManager, "time_picker")
         }
 
-        binding.pickDoseNumber.editText?.addTextChangedListener {
-            if (it.toString().isNotEmpty()) {
-                val doseNumber = it.toString().toInt()
-                viewModel.setDoseNumber(doseNumber)
+        binding.doseNumber.addTextChangedListener { text ->
+            if (text.toString().isNotEmpty()) {
+                viewModel.setDoseNumber(text.toString().toInt())
             }
         }
 

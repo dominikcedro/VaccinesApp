@@ -9,13 +9,11 @@
     <TextView
         android:id="@+id/tvWelcome"
         android:layout_width="392dp"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:width="200dp"
-        android:height="60dp"
-        android:text="Welcome back!"
+        android:text="Add administered vaccine"
         android:textAlignment="center"
         android:textSize="36sp"
         android:textStyle="bold"
@@ -61,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"
-                    android:hint="Choose vaccine">
+                    android:hint="Choose vaccine type">
                 </AutoCompleteTextView>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -78,10 +76,34 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pickHour" />
+                app:layout_constraintTop_toBottomOf="@+id/doseNumberLayout" />
+
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/pickHour"
+                android:id="@+id/pickDateLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pickHourLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pickDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:hint="Pick vaccine's date" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pickHourLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -92,18 +114,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/menu">
 
-                <AutoCompleteTextView
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pickTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none">
-                </AutoCompleteTextView>
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:hint="Pick vaccine's time" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
-
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/pickDate"
+                android:id="@+id/doseNumberLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -112,33 +135,14 @@
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pickHour">
+                app:layout_constraintTop_toBottomOf="@+id/pickDateLayout">
 
-                <AutoCompleteTextView
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/doseNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none">
-                </AutoCompleteTextView>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/pickDoseNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pickDate">
-
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number">
-                </AutoCompleteTextView>
+                    android:inputType="number"
+                    android:hint="Vaccine's dose number" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
