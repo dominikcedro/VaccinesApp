@@ -33,6 +33,11 @@ class AddAdministeredVaccineFragment : Fragment() {
     private var _binding: FragmentAddAdministeredVaccineBinding? = null
     private val binding get() = _binding!!
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

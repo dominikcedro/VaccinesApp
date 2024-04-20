@@ -5,6 +5,8 @@ import com.example.vaccineapp.auth.RegistrationRequest
 import com.example.vaccineapp.auth.LogoutRequest
 import com.example.vaccineapp.domain.AdministeredVaccinationGetRequest
 import com.example.vaccineapp.domain.AdministeredVaccinePostRequest
+import com.example.vaccineapp.domain.ScheduledVaccinationGetRequest
+import com.example.vaccineapp.domain.ScheduledVaccinationPostRequest
 import com.example.vaccineapp.domain.Vaccine
 
 import io.ktor.client.*
@@ -61,6 +63,12 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
         return response.body<List<Vaccine>>()
     }
 
+    suspend fun fetchRecommendedVaccines(): List<Vaccine> {
+        val url = "$usersServiceUrl/vaccine/recommended"
+        val response = defaultHttpClient.get(url)
+        return response.body<List<Vaccine>>()
+    }
+
     suspend fun addAdministeredVaccine(administeredVaccinePostRequest: AdministeredVaccinePostRequest) {
         val url = "$usersServiceUrl/vaccination/administered"
         defaultHttpClient.post(url) {
@@ -73,6 +81,20 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
         val url = "$usersServiceUrl/vaccination/administered/user"
         val response = defaultHttpClient.get(url)
         return response.body<List<AdministeredVaccinationGetRequest>>()
+    }
+
+    suspend fun fetchScheduledVaccines(): List<ScheduledVaccinationGetRequest> {
+        val url = "$usersServiceUrl/vaccination/scheduled/user"
+        val response = defaultHttpClient.get(url)
+        return response.body<List<ScheduledVaccinationGetRequest>>()
+    }
+
+    suspend fun postScheduledVaccination(scheduledVaccinationPostRequest: ScheduledVaccinationPostRequest) {
+        val url = "$usersServiceUrl/vaccination/scheduled"
+        defaultHttpClient.post(url) {
+            contentType(ContentType.Application.Json)
+            setBody(scheduledVaccinationPostRequest)
+        }
     }
 
 }
