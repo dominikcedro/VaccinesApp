@@ -33,6 +33,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
+
         app:cardBackgroundColor="@android:color/transparent"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +46,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="1dp" />
+                tools:layout_editor_absoluteY="1dp"
+                android:background="@android:color/transparent"
+                />
 
     </androidx.cardview.widget.CardView>
 

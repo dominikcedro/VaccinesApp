@@ -17,6 +17,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.vaccineapp.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,5 +57,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         askNotificationPermission()
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        NavigationUI.setupWithNavController(bottomNav, navController)
+
+        bottomNav.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.new_vaccine -> {
+                    navController.navigate(R.id.addScheduledVaccinationFragment)
+                    true
+                }
+                R.id.calendar -> {
+                    navController.navigate(R.id.mainMenuFragment)
+                    true
+                }
+                R.id.administered -> {
+                    navController.navigate(R.id.administeredVaccinationsFragment)
+                    true
+                }
+                else -> false
+            }
+        }
     }
 }
