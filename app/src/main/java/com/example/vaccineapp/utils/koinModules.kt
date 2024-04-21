@@ -10,6 +10,9 @@ import com.example.vaccineapp.service.Validator
 import com.example.vaccineapp.viewmodel.LoginViewModel
 import com.example.vaccineapp.viewmodel.RegisterViewModel
 import com.example.vaccineapp.auth.ErrorResponse
+import com.example.vaccineapp.viewmodel.AddAdministeredVaccinationViewModel
+import com.example.vaccineapp.viewmodel.AddScheduledVaccinationViewModel
+import com.example.vaccineapp.viewmodel.AdministeredVaccinationViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.android.Android
@@ -115,4 +118,7 @@ val serviceModule = module {
 val viewModelModule = module {
     single { LoginViewModel(get(), get()) }
     single { RegisterViewModel(get(), get(), get()) }
+    single { AddAdministeredVaccinationViewModel(get()) }
+    single { AdministeredVaccinationViewModel(get()) }
+    single { AddScheduledVaccinationViewModel(get()) }
 }
