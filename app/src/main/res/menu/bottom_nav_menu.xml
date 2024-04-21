@@ -6,10 +6,10 @@
         android:icon="@drawable/ic_previous_vaccines"/>
     <item
         android:id="@+id/calendar"
-        android:title="Calendar"
+        android:title="Home"
         android:icon="@drawable/ic_calendar"/>
     <item
         android:id="@+id/new_vaccine"
-        android:title="New Vaccine"
+        android:title="New Scheduled"
         android:icon="@drawable/ic_add_new_vaccine"/>
 </menu>
