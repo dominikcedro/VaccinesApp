@@ -137,7 +137,7 @@ class AddScheduledVaccinationFragment : Fragment() {
                 val zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.of(zoneOffset.id))
 
                 viewModel.setChosenZonedDateTime(zonedDateTime)
-                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX")
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
 
                 binding.pickDate.setText(zonedDateTime.format(formatter))
             }
@@ -187,7 +187,7 @@ class AddScheduledVaccinationFragment : Fragment() {
             removeReminder(reminderView, reminder)
         }
         val reminderDate = reminderView.findViewById<TextView>(R.id.tvReminder)
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX")
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
         reminderDate.text = reminder.dateTime?.format(formatter)
     }
 
