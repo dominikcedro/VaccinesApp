@@ -42,30 +42,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/background_field_rounded">
-
-
-            <Button
-                android:id="@+id/manageUserButton"
-                android:layout_width="219dp"
-                android:layout_height="65dp"
-                android:layout_marginStart="66dp"
-                android:layout_marginTop="62dp"
-                android:text="manage_user"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/seeVaccinesButton" />
-
-            <Button
-                android:id="@+id/seeVaccinesButton"
-                android:layout_width="226dp"
-                android:layout_height="69dp"
-                android:layout_marginStart="62dp"
-                android:layout_marginTop="117dp"
-                android:text="seeVaccines"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:background="@drawable/background_field_rounded"/>
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

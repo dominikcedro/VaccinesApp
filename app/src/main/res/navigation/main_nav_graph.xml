@@ -22,7 +22,11 @@
         android:id="@+id/mainMenuFragment"
         android:name="com.example.vaccineapp.fragments.MainMenuFragment"
         tools:layout="@layout/fragment_main_menu"
-        android:label="MainMenuFragment" />
+        android:label="MainMenuFragment" >
+        <action
+            android:id="@+id/action_mainMenuFragment_to_addScheduledVaccinationFragment"
+            app:destination="@id/addScheduledVaccinationFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/administeredVaccinationsFragment"
@@ -41,6 +45,9 @@
         android:label="AddScheduledVaccinationFragment" >
         <action
             android:id="@+id/action_addScheduledVaccinationFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+        <action
+            android:id="@+id/action_addScheduledVaccinationFragment_to_mainMenuFragment2"
             app:destination="@id/mainMenuFragment" />
     </fragment>
 </navigation>
