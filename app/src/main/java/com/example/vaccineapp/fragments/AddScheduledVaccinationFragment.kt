@@ -13,7 +13,6 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import com.example.vaccineapp.R
-import com.example.vaccineapp.databinding.FragmentAddAdministeredVaccineBinding
 import com.example.vaccineapp.databinding.FragmentAddScheduledVaccinationBinding
 import com.example.vaccineapp.domain.ReminderPostRequest
 import com.example.vaccineapp.viewmodel.AddScheduledVaccinationViewModel
@@ -101,7 +100,7 @@ class AddScheduledVaccinationFragment : Fragment() {
                     reminder.dateTime += "T$hour:$minute"
 
                     viewModel.addReminder(reminder)
-                    addReminder(reminder.dateTime)
+                    inflateReminder(reminder)
                 }
                 timePicker.show(childFragmentManager, "time_picker")
             }
@@ -109,23 +108,24 @@ class AddScheduledVaccinationFragment : Fragment() {
         }
     }
 
-    private fun addReminder(reminderDateTime: String) {
+    private fun inflateReminder(reminder: ReminderPostRequest) {
         val newReminder = LayoutInflater.from(requireContext()).inflate(R.layout.item_reminder, binding.reminderLayout, false)
         binding.reminderLayout.addView(newReminder)
-        initReminder(newReminder, reminderDateTime)
+        initReminder(newReminder, reminder)
     }
 
-    private fun initReminder(reminder: View, reminderDateTime: String) {
-        val deleteButton = reminder.findViewById<Button>(R.id.btnDelete)
+    private fun initReminder(reminderView: View, reminder: ReminderPostRequest) {
+        val deleteButton = reminderView.findViewById<Button>(R.id.btnDelete)
         deleteButton.setOnClickListener {
-            removeReminder(reminder)
+            removeReminder(reminderView, reminder)
         }
-        val reminderDate = reminder.findViewById<TextView>(R.id.tvReminder)
-        reminderDate.text = reminderDateTime
+        val reminderDate = reminderView.findViewById<TextView>(R.id.tvReminder)
+        reminderDate.text = reminder.dateTime
     }
 
-    private fun removeReminder(reminder: View) {
-        binding.reminderLayout.removeView(reminder)
+    private fun removeReminder(reminderView: View, reminder: ReminderPostRequest) {
+        binding.reminderLayout.removeView(reminderView)
+        viewModel.removeReminder(reminder)
     }
 
     private fun initDropdownMenu() {

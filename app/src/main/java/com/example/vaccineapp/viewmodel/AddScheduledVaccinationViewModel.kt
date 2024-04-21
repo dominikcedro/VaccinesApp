@@ -46,4 +46,8 @@ class AddScheduledVaccinationViewModel(private val httpService: HttpService) : V
     fun addReminder(reminder: ReminderPostRequest) {
         this.reminders.add(reminder)
     }
+
+    fun removeReminder(reminder: ReminderPostRequest) {
+        this.reminders.remove(reminder)
+    }
 }
