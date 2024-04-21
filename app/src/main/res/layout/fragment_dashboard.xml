@@ -8,7 +8,7 @@
     android:background="@drawable/gradient_background">
 
 
-<TextView
+    <TextView
         android:id="@+id/mainMenuTV"
         android:layout_width="392dp"
         android:layout_height="55dp"
@@ -18,7 +18,7 @@
         android:width="200dp"
         android:height="60dp"
         android:background="@android:color/transparent"
-        android:text="Main Menu"
+        android:text="Dashboard"
         android:textAlignment="center"
         android:textSize="36sp"
         android:textStyle="bold"

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vaccineapp.R
 import com.example.vaccineapp.domain.AdministeredVaccinationGetRequest
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AdministeredVaccinationAdapter(private val myDataset: Array<AdministeredVaccinationGetRequest>, private val onFloatingButtonClicked: () -> Unit) :
@@ -45,6 +46,6 @@ class AdministeredVaccinationAdapter(private val myDataset: Array<AdministeredVa
     override fun getItemCount() = myDataset.size + 1
 
     class FloatingButtonViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val floatingButton: FloatingActionButton = view.findViewById(R.id.floatingButton)
+        val floatingButton: MaterialButton = view.findViewById(R.id.floatingButton)
     }
 }

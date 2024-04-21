@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/addScheduledVaccinationFragment">
+    app:startDestination="@id/mainMenuFragment">
 
     <fragment
         android:id="@+id/addAdministeredVaccineFragment"
@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/mainMenuFragment"
         android:name="com.example.vaccineapp.fragments.MainMenuFragment"
-        tools:layout="@layout/fragment_main_menu"
+        tools:layout="@layout/fragment_dashboard"
         android:label="MainMenuFragment" >
         <action
             android:id="@+id/action_mainMenuFragment_to_addScheduledVaccinationFragment"

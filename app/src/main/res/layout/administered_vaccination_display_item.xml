@@ -19,15 +19,20 @@
             android:id="@+id/vaccineName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:textStyle="bold"
             android:gravity="center"
-            android:textSize="18sp"
+            android:textSize="22sp"
+            android:text="Vaccine Name"
             android:layout_marginVertical="8dp"/>
 
         <TextView
             android:id="@+id/vaccineDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/background_field_rounded"
             android:gravity="center"
+            android:text="Vaccine date"
             android:textSize="18sp"
             android:layout_marginVertical="8dp"/>
 
@@ -35,7 +40,9 @@
             android:id="@+id/doseNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/background_field_rounded"
             android:gravity="center"
+            android:text="Vaccine doses"
             android:textSize="18sp"
             android:layout_marginVertical="8dp"/>
 
