@@ -15,6 +15,7 @@ import com.example.vaccineapp.viewmodel.AddAdministeredVaccinationViewModel
 import com.example.vaccineapp.viewmodel.AdministeredVaccinationViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.navigation.fragment.findNavController
 
 class AdministeredVaccinationsFragment : Fragment() {
     private val viewModel: AdministeredVaccinationViewModel by viewModel()
@@ -32,8 +33,12 @@ class AdministeredVaccinationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
+
             viewModel.getAdministeredVaccinations()
-            val adapter = AdministeredVaccinationAdapter(viewModel.administeredVaccinations.toTypedArray())
+            val adapter = AdministeredVaccinationAdapter(viewModel.administeredVaccinations.toTypedArray()){
+                // Navigate to the other fragment
+                findNavController().navigate(R.id.action_administeredVaccinationsFragment_to_addAdministeredVaccineFragment)
+            }
             binding.administeredVaccinationsRV.adapter = adapter
         }
         val layoutManager = LinearLayoutManager(context)
