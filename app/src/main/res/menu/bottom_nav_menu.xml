@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/administered"
+        android:title="Administred"
+        android:icon="@drawable/ic_previous_vaccines"/>
+    <item
+        android:id="@+id/calendar"
+        android:title="Calendar"
+        android:icon="@drawable/ic_calendar"/>
+    <item
+        android:id="@+id/new_vaccine"
+        android:title="New Vaccine"
+        android:icon="@drawable/ic_add_new_vaccine"/>
+</menu>
