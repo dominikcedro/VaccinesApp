@@ -1,4 +1,4 @@
-package com.example.vaccineapp.recycler_view
+package com.example.vaccineapp.administered_recycler_view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vaccineapp.R
 import com.example.vaccineapp.domain.AdministeredVaccinationGetRequest
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AdministeredVaccinationAdapter(private val myDataset: Array<AdministeredVaccinationGetRequest>, private val onFloatingButtonClicked: () -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         bottomNav.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.new_vaccine -> {
-                    navController.navigate(R.id.addScheduledVaccinationFragment)
+                    navController.navigate(R.id.ScheduledVaccinationsFragment)
                     true
                 }
                 R.id.calendar -> {

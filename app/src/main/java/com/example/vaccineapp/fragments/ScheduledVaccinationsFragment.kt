@@ -14,9 +14,12 @@ import com.example.vaccineapp.viewmodel.AdministeredVaccinationViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.navigation.fragment.findNavController
+import com.example.vaccineapp.viewmodel.ScheduledVaccinationViewModel
+import com.example.vaccineapp.scheduled_recycler_view.ScheduledVaccinationAdapter
 
-class AdministeredVaccinationsFragment : Fragment() {
-    private val viewModel: AdministeredVaccinationViewModel by viewModel()
+
+class ScheduledVaccinationsFragment : Fragment() {
+    private val viewModel: ScheduledVaccinationViewModel by viewModel()
     private var _binding: FragmentAdministeredVaccinationsBinding? = null
     private val binding get() = _binding!!
 
@@ -33,9 +36,9 @@ class AdministeredVaccinationsFragment : Fragment() {
         lifecycleScope.launch {
 
             viewModel.getAdministeredVaccinations()
-            val adapter = AdministeredVaccinationAdapter(viewModel.administeredVaccinations.toTypedArray()){
+            val adapter = ScheduledVaccinationAdapter(viewModel.scheduledVaccinations.toTypedArray()){
                 // Navigate to the other fragment
-                findNavController().navigate(R.id.action_administeredVaccinationsFragment_to_addAdministeredVaccineFragment)
+                findNavController().navigate(R.id.action_scheduledVaccinationsFragment_to_addScheduledVaccinationFragment)
             }
             binding.administeredVaccinationsRV.adapter = adapter
         }

@@ -3,13 +3,16 @@
     <item
         android:id="@+id/administered"
         android:title="Administred"
+        android:background="@android:color/transparent"
         android:icon="@drawable/ic_previous_vaccines"/>
     <item
         android:id="@+id/calendar"
         android:title="Home"
+        android:background="@android:color/transparent"
         android:icon="@drawable/ic_calendar"/>
     <item
         android:id="@+id/new_vaccine"
         android:title="New Scheduled"
+        android:background="@android:color/transparent"
         android:icon="@drawable/ic_add_new_vaccine"/>
 </menu>
