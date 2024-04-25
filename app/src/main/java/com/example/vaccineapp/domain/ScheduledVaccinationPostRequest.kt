@@ -8,5 +8,5 @@ data class ScheduledVaccinationPostRequest(
     val vaccineId: Long,
     val doseNumber: Int,
     val dateTime: String,
-    val reminderPostRequests: List<ReminderPostRequest>
+    val reminders: List<ReminderPostRequest>
 )
