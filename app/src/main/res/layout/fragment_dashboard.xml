@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:paddingBottom="?attr/actionBarSize">
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.MainMenuFragment"
     android:background="@drawable/gradient_background">
 
 
-<TextView
+    <TextView
         android:id="@+id/mainMenuTV"
         android:layout_width="392dp"
         android:layout_height="55dp"
@@ -18,7 +25,7 @@
         android:width="200dp"
         android:height="60dp"
         android:background="@android:color/transparent"
-        android:text="Main Menu"
+        android:text="Dashboard"
         android:textAlignment="center"
         android:textSize="36sp"
         android:textStyle="bold"
@@ -41,8 +48,30 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background_field_rounded"/>
+            android:layout_height="400dp"
+            android:background="@drawable/background_field_rounded" >
+
+            <TextClock
+                android:id="@+id/clock"
+                android:layout_width="213dp"
+                android:layout_height="69dp"
+                android:layout_marginStart="68dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="sans-serif-light"
+                android:format12Hour="HH:mm"
+                android:format24Hour="HH:mm"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

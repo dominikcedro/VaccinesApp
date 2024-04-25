@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/addScheduledVaccinationFragment">
+    app:startDestination="@id/mainMenuFragment">
 
     <fragment
         android:id="@+id/addAdministeredVaccineFragment"
@@ -21,11 +21,11 @@
     <fragment
         android:id="@+id/mainMenuFragment"
         android:name="com.example.vaccineapp.fragments.MainMenuFragment"
-        tools:layout="@layout/fragment_main_menu"
+        tools:layout="@layout/fragment_dashboard"
         android:label="MainMenuFragment" >
         <action
-            android:id="@+id/action_mainMenuFragment_to_addScheduledVaccinationFragment"
-            app:destination="@id/addScheduledVaccinationFragment" />
+            android:id="@+id/action_mainMenuFragment_to_ScheduledVaccinationsFragment"
+            app:destination="@id/ScheduledVaccinationsFragment" />
     </fragment>
 
     <fragment
@@ -43,11 +43,21 @@
         android:name="com.example.vaccineapp.fragments.AddScheduledVaccinationFragment"
         tools:layout="@layout/fragment_add_scheduled_vaccination"
         android:label="AddScheduledVaccinationFragment" >
-        <action
-            android:id="@+id/action_addScheduledVaccinationFragment_to_mainMenuFragment"
-            app:destination="@id/mainMenuFragment" />
-        <action
-            android:id="@+id/action_addScheduledVaccinationFragment_to_mainMenuFragment2"
-            app:destination="@id/mainMenuFragment" />
+
     </fragment>
+
+    <fragment
+        android:id="@+id/ScheduledVaccinationsFragment"
+        android:name="com.example.vaccineapp.fragments.ScheduledVaccinationsFragment"
+        tools:layout="@layout/fragment_scheduled_vaccinations"
+        android:label="ScheduledVaccinationsFragment" >
+        <action
+            android:id="@+id/action_scheduledVaccinationsFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+        <action
+            android:id="@+id/action_scheduledVaccinationsFragment_to_addScheduledVaccinationFragment"
+            app:destination="@id/addScheduledVaccinationFragment" />
+
+    </fragment>
+
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.vaccineapp.recycler_view
+package com.example.vaccineapp.administered_recycler_view
 
 import android.view.View
 import android.widget.TextView
