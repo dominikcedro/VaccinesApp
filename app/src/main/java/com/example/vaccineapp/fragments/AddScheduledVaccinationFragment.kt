@@ -88,44 +88,44 @@ class AddScheduledVaccinationFragment : Fragment() {
             datePicker.show(childFragmentManager, "date_picker")
         }
 
-        binding.pickTime.setOnClickListener {
-            val timePicker = MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_24H).build()
-            timePicker.addOnPositiveButtonClickListener {
-                val hour = String.format("%02d", timePicker.hour)
-                val minute = String.format("%02d", timePicker.minute)
-                val timeString = "$hour:$minute"
-                val time = LocalTime.parse(timeString)
-                viewModel.setChosenTime(time)
-                binding.pickTime.setText(timeString)
-            }
-            timePicker.show(childFragmentManager, "time_picker")
-        }
+//        binding.pickTime.setOnClickListener {
+//            val timePicker = MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_24H).build()
+//            timePicker.addOnPositiveButtonClickListener {
+//                val hour = String.format("%02d", timePicker.hour)
+//                val minute = String.format("%02d", timePicker.minute)
+//                val timeString = "$hour:$minute"
+//                val time = LocalTime.parse(timeString)
+//                viewModel.setChosenTime(time)
+//                binding.pickTime.setText(timeString)
+//            }
+//            timePicker.show(childFragmentManager, "time_picker")
+//        }
+//
+//        binding.btnAddReminder.setOnClickListener {
+//            val reminder = Reminder()
+//            setDateTimeForReminder(reminder)
+//        }
 
-        binding.btnAddReminder.setOnClickListener {
-            val reminder = Reminder()
-            setDateTimeForReminder(reminder)
-        }
 
-
-        binding.btnSubmit.setOnClickListener {
-            if (viewModel.isThereNextDose()) {
-                lifecycleScope.launch {
-                    viewModel.postScheduledVaccination()
-                    viewModel.addNextDose()
-                    binding.pickDate.setText("")
-                    binding.reminderLayout.removeAllViews()
-                    binding.chooseVaccineTextView.isEnabled = false
-                }
-            } else {
-                    lifecycleScope.launch {
-                    viewModel.postScheduledVaccination()
-                    viewModel.addNextDose()
-                    binding.pickDate.setText("")
-                    binding.reminderLayout.removeAllViews()
-                    binding.chooseVaccineTextView.isEnabled = false
-                }
-            }
-        }
+//        binding.btnSubmit.setOnClickListener {
+//            if (viewModel.isThereNextDose()) {
+//                lifecycleScope.launch {
+//                    viewModel.postScheduledVaccination()
+//                    viewModel.addNextDose()
+//                    binding.pickDate.setText("")
+//                    binding.reminderLayout.removeAllViews()
+//                    binding.chooseVaccineTextView.isEnabled = false
+//                }
+//            } else {
+//                    lifecycleScope.launch {
+//                    viewModel.postScheduledVaccination()
+//                    viewModel.addNextDose()
+//                    binding.pickDate.setText("")
+//                    binding.reminderLayout.removeAllViews()
+//                    binding.chooseVaccineTextView.isEnabled = false
+//                }
+//            }
+//        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -175,55 +175,55 @@ class AddScheduledVaccinationFragment : Fragment() {
         datePicker.show(childFragmentManager, "date_picker")
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun setDateTimeForReminder(reminder: Reminder) {
-        val datePicker = MaterialDatePicker.Builder.datePicker().build()
-        datePicker.addOnPositiveButtonClickListener { selectedDate ->
-            val date = Instant.ofEpochMilli(selectedDate).atZone(ZoneId.systemDefault()).toLocalDate()
-
-            val timePicker = MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_24H).build()
-            timePicker.addOnPositiveButtonClickListener {
-                val hour = timePicker.hour
-                val minute = timePicker.minute
-                val localTime = LocalTime.of(hour, minute)
-                val localDateTime = LocalDateTime.of(date, localTime)
-
-                // Get the system's zone offset
-                val zoneOffset = OffsetDateTime.now(ZoneId.systemDefault()).offset
-                val zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.of(zoneOffset.id))
-
-                reminder.dateTime = zonedDateTime
-
-                viewModel.addReminder(reminder)
-                inflateReminder(reminder)
-            }
-            timePicker.show(childFragmentManager, "time_picker")
-        }
-        datePicker.show(childFragmentManager, "date_picker")
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun inflateReminder(reminder: Reminder) {
-        val newReminder = LayoutInflater.from(requireContext()).inflate(R.layout.item_reminder, binding.reminderLayout, false)
-        binding.reminderLayout.addView(newReminder)
-        initReminder(newReminder, reminder)
-    }
+//    @RequiresApi(Build.VERSION_CODES.O)
+//    private fun setDateTimeForReminder(reminder: Reminder) {
+//        val datePicker = MaterialDatePicker.Builder.datePicker().build()
+//        datePicker.addOnPositiveButtonClickListener { selectedDate ->
+//            val date = Instant.ofEpochMilli(selectedDate).atZone(ZoneId.systemDefault()).toLocalDate()
+//
+//            val timePicker = MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_24H).build()
+//            timePicker.addOnPositiveButtonClickListener {
+//                val hour = timePicker.hour
+//                val minute = timePicker.minute
+//                val localTime = LocalTime.of(hour, minute)
+//                val localDateTime = LocalDateTime.of(date, localTime)
+//
+//                // Get the system's zone offset
+//                val zoneOffset = OffsetDateTime.now(ZoneId.systemDefault()).offset
+//                val zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.of(zoneOffset.id))
+//
+//                reminder.dateTime = zonedDateTime
+//
+//                viewModel.addReminder(reminder)
+//                inflateReminder(reminder)
+//            }
+//            timePicker.show(childFragmentManager, "time_picker")
+//        }
+//        datePicker.show(childFragmentManager, "date_picker")
+//    }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun initReminder(reminderView: View, reminder: Reminder) {
-        val deleteButton = reminderView.findViewById<Button>(R.id.btnDelete)
-        deleteButton.setOnClickListener {
-            removeReminder(reminderView, reminder)
-        }
-        val reminderDate = reminderView.findViewById<TextView>(R.id.tvReminder)
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
-        reminderDate.text = reminder.dateTime?.format(formatter)
-    }
+//    private fun inflateReminder(reminder: Reminder) {
+//        val newReminder = LayoutInflater.from(requireContext()).inflate(R.layout.item_reminder, binding.reminderLayout, false)
+//        binding.reminderLayout.addView(newReminder)
+//        initReminder(newReminder, reminder)
+//    }
 
-    private fun removeReminder(reminderView: View, reminder: Reminder) {
-        binding.reminderLayout.removeView(reminderView)
-        viewModel.removeReminder(reminder)
-    }
+//    @RequiresApi(Build.VERSION_CODES.O)
+//    private fun initReminder(reminderView: View, reminder: Reminder) {
+//        val deleteButton = reminderView.findViewById<Button>(R.id.btnDelete)
+//        deleteButton.setOnClickListener {
+//            removeReminder(reminderView, reminder)
+//        }
+//        val reminderDate = reminderView.findViewById<TextView>(R.id.tvReminder)
+//        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+//        reminderDate.text = reminder.dateTime?.format(formatter)
+//    }
+//
+////    private fun removeReminder(reminderView: View, reminder: Reminder) {
+////        binding.reminderLayout.removeView(reminderView)
+////        viewModel.removeReminder(reminder)
+////    }
 
     private fun initDropdownMenu() {
         val adapter = ArrayAdapter(requireContext(), R.layout.vaccine_menu_item, viewModel.getVaccineNames())

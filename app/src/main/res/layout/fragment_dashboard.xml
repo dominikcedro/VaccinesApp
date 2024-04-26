@@ -61,7 +61,8 @@
                 android:format12Hour="HH:mm"
                 android:format24Hour="HH:mm"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="38sp"
+                android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
