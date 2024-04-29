@@ -7,6 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextClock
 import androidx.fragment.app.Fragment
 import com.example.vaccineapp.databinding.FragmentDashboardBinding
+import android.graphics.LinearGradient
+import android.graphics.Shader
+import android.graphics.Color
+import android.widget.TextView
+
 
 class MainMenuFragment : Fragment() {
 
@@ -22,12 +27,20 @@ class MainMenuFragment : Fragment() {
         val clock: TextClock = binding.clock
         clock.format24Hour = "HH:mm"
 
-        return binding.root
-    }
+        val paint = clock.paint
+        val width = paint.measureText(clock.text.toString())
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        val textShader: Shader = LinearGradient(0f, 0f, width, clock.textSize, intArrayOf(
+            Color.parseColor("#F97C3C"),
+            Color.parseColor("#FDB54E"),
+            Color.parseColor("#64B678"),
+            Color.parseColor("#478AEA"),
+            Color.parseColor("#8446CC"),
+        ), null, Shader.TileMode.CLAMP)
+
+        clock.paint.shader = textShader
+
+        return binding.root
     }
 
     companion object {
