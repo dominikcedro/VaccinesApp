@@ -45,11 +45,11 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
-        binding.etLoginEmail.addTextChangedListener { text ->
+        binding.etLoginEmail.editText?.addTextChangedListener { text ->
             viewModel.updateEmail(text.toString())
         }
 
-        binding.etLoginPassword.addTextChangedListener { text ->
+        binding.etLoginPassword.editText?.addTextChangedListener { text ->
             viewModel.updatePassword(text.toString())
         }
 

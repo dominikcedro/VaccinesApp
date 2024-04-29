@@ -44,6 +44,9 @@
         tools:layout="@layout/fragment_add_scheduled_vaccination"
         android:label="AddScheduledVaccinationFragment" >
 
+        <action
+            android:id="@+id/action_addScheduledVaccinationFragment_to_ScheduledVaccinationsFragment"
+            app:destination="@id/ScheduledVaccinationsFragment" />
     </fragment>
 
     <fragment

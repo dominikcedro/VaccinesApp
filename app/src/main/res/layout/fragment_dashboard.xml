@@ -57,11 +57,14 @@
                 android:layout_height="69dp"
                 android:layout_marginStart="68dp"
                 android:layout_marginTop="32dp"
-                android:fontFamily="sans-serif-light"
                 android:format12Hour="HH:mm"
                 android:format24Hour="HH:mm"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="38sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/archivo_black"
+                android:background="@drawable/background_field_rounded"
+                android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
