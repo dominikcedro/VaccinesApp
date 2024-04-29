@@ -103,8 +103,6 @@ class AddScheduledVaccinationFragment : Fragment() {
     private fun getSelectedDateTime(){
         val datePickerBuilder = MaterialDatePicker.Builder.datePicker()
 
-
-
         if (viewModel.getCurrentDoseNumber() > 1){
             val oneWeek = Period.ofWeeks(1)
             val recommendedDate = viewModel.getRecommendedDateForDose()
