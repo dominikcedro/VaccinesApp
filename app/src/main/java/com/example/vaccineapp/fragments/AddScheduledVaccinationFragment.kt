@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.vaccineapp.R
 import com.example.vaccineapp.databinding.FragmentAddScheduledVaccinationBinding
 import com.example.vaccineapp.domain.Reminder
@@ -95,6 +96,11 @@ class AddScheduledVaccinationFragment : Fragment() {
                     binding.reminderLayout.removeAllViews()
                     binding.chooseVaccineTextView.isEnabled = false
                 }
+            } else {
+                lifecycleScope.launch {
+                    viewModel.postScheduledVaccination()
+                    findNavController().navigate(R.id.action_addScheduledVaccinationFragment_to_mainMenuFragment)
+                }
             }
         }
     }
@@ -102,7 +108,6 @@ class AddScheduledVaccinationFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getSelectedDateTime(){
         val datePickerBuilder = MaterialDatePicker.Builder.datePicker()
-
 
 
         if (viewModel.getCurrentDoseNumber() > 1){
@@ -187,7 +192,7 @@ class AddScheduledVaccinationFragment : Fragment() {
             removeReminder(reminderView, reminder)
         }
         val reminderDate = reminderView.findViewById<TextView>(R.id.tvReminder)
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX")
+        val formatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd")
         reminderDate.text = reminder.dateTime?.format(formatter)
     }
 
