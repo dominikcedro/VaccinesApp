@@ -69,6 +69,10 @@ class AddScheduledVaccinationViewModel(private val httpService: HttpService) : V
         this.reminders.remove(reminder)
     }
 
+    fun getReminders(): List<Reminder> {
+        return reminders
+    }
+
     fun addNextDose(){
         if (!isThereNextDose()) {
             return

@@ -94,6 +94,14 @@ class AddScheduledVaccinationFragment : Fragment() {
         }
 
         binding.btnAddReminder.setOnClickListener {
+            if (viewModel.getReminders().size >= 3) {
+                showSnackBar("You can only have 3 reminders", true)
+                return@setOnClickListener
+            }
+            if (viewModel.chosenZonedDateTime.value == null) {
+                showSnackBar("Please choose a vaccination date first", true)
+                return@setOnClickListener
+            }
             val reminder = Reminder()
             setDateTimeForReminder(reminder)
         }
@@ -124,8 +132,6 @@ class AddScheduledVaccinationFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getSelectedDateTime(){
         val datePickerBuilder = MaterialDatePicker.Builder.datePicker()
-
-
         if (viewModel.getCurrentDoseNumber() > 1){
             val oneWeek = Period.ofWeeks(1)
             val recommendedDate = viewModel.getRecommendedDateForDose()
