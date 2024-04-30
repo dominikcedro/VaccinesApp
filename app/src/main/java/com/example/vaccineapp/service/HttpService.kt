@@ -97,4 +97,20 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
         }
     }
 
+    suspend fun getVaccinationsToConfirm(): List<ScheduledVaccinationGetRequest> {
+        val url = "$usersServiceUrl/vaccination/scheduled/confirmation"
+        val response = defaultHttpClient.get(url)
+        return response.body<List<ScheduledVaccinationGetRequest>>()
+    }
+
+    suspend fun confirmVaccination(scheduledVaccinationId: Long) {
+        val url = "$usersServiceUrl/vaccination/scheduled/confirmation/$scheduledVaccinationId"
+        defaultHttpClient.patch(url)
+    }
+
+    suspend fun deleteScheduledVaccination(scheduledVaccinationId: Long) {
+        val url = "$usersServiceUrl/vaccination/schedule/$scheduledVaccinationId"
+        defaultHttpClient.delete(url)
+    }
+
 }
