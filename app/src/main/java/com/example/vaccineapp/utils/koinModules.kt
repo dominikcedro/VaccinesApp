@@ -13,6 +13,7 @@ import com.example.vaccineapp.auth.ErrorResponse
 import com.example.vaccineapp.viewmodel.AddAdministeredVaccinationViewModel
 import com.example.vaccineapp.viewmodel.AddScheduledVaccinationViewModel
 import com.example.vaccineapp.viewmodel.AdministeredVaccinationViewModel
+import com.example.vaccineapp.viewmodel.MainMenuViewModel
 import com.example.vaccineapp.viewmodel.ScheduledVaccinationViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -123,4 +124,5 @@ val viewModelModule = module {
     single { AdministeredVaccinationViewModel(get()) }
     single { AddScheduledVaccinationViewModel(get()) }
     single { ScheduledVaccinationViewModel(get()) }
+    single { MainMenuViewModel(get()) }
 }
