@@ -80,26 +80,11 @@ val httpClientModule = module {
             }
             expectSuccess = true
             HttpResponseValidator {
-                handleResponseExceptionWithRequest { exception, request ->
+                handleResponseExceptionWithRequest { exception, _ ->
                     val clientException = exception as? ClientRequestException ?: return@handleResponseExceptionWithRequest
                     val exceptionResponse = clientException.response
-                    when (exceptionResponse.status) {
-                        HttpStatusCode.Unauthorized -> {
-                            val errorDetails = exceptionResponse.body<ErrorResponse>()
-                            when(errorDetails.detail) {
-                                "User not found" -> throw Exception("User not found")
-                                "Bad credentials" -> throw Exception("Password incorrect")
-                                else -> throw Exception("Unknown error")
-                            }
-                        }
-                        HttpStatusCode.Conflict -> {
-                            val errorDetails = exceptionResponse.body<ErrorResponse>()
-                            when(errorDetails.detail) {
-                                "User already exists" -> throw Exception("User already exists")
-                                else -> throw Exception("Unknown error")
-                            }
-                        }
-                    }
+                    val errorResponse = exceptionResponse.body<ErrorResponse>()
+                    throw Exception(errorResponse.detail ?: "Unknown error")
                 }
             }
 
