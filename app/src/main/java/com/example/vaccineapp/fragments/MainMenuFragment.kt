@@ -11,11 +11,15 @@ import com.example.vaccineapp.databinding.FragmentDashboardBinding
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.graphics.Color
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import com.example.vaccineapp.domain.ScheduledVaccinationGetRequest
 import com.example.vaccineapp.viewmodel.MainMenuViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 
 class MainMenuFragment : Fragment() {
@@ -70,20 +74,28 @@ class MainMenuFragment : Fragment() {
         fun newInstance() = MainMenuFragment()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun confirmVaccinationDialog(scheduledVaccination: ScheduledVaccinationGetRequest) {
         val builder = AlertDialog.Builder(context)
 
         val vaccinationName = scheduledVaccination.vaccine.name
-        val vaccinationDate = scheduledVaccination.dateTime
+
+        val originalFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ")
+        val desiredFormat = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")
+
+        val vaccinationDateString = scheduledVaccination.dateTime
+
+        val date = ZonedDateTime.parse(vaccinationDateString, originalFormat)
+        val formattedDate = date.format(desiredFormat)
 
         builder.setTitle("Confirm Vaccination")
-        builder.setMessage("Did you attend the $vaccinationName vaccination on $vaccinationDate?")
+        builder.setMessage("Did you attend the $vaccinationName vaccination on $formattedDate?")
 
-        builder.setPositiveButton("Yes") { dialog, which ->
+        builder.setPositiveButton("Yes") { _, _ ->
             viewModel.confirmVaccination(scheduledVaccination)
         }
 
-        builder.setNegativeButton("No") { dialog, which ->
+        builder.setNegativeButton("No") { _, _ ->
             viewModel.declineVaccination(scheduledVaccination)
         }
 
