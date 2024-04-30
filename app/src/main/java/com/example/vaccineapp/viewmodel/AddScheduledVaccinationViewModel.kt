@@ -22,9 +22,9 @@ class AddScheduledVaccinationViewModel(private val httpService: HttpService) : V
     private val reminders = mutableListOf<Reminder>()
     private val recommendedVaccines = mutableListOf<Vaccine>()
     private val alreadyScheduledVaccinations = mutableListOf<ScheduledVaccinationGetRequest>()
-    private val chosenVaccineIndex = MutableLiveData<Int>()
+    val chosenVaccineIndex = MutableLiveData<Int>()
     private var doseNumber = MutableLiveData<Int>(1)
-    private val chosenZonedDateTime = MutableLiveData<ZonedDateTime?>()
+    val chosenZonedDateTime = MutableLiveData<ZonedDateTime?>()
     private var previousDoseZonedDateTime: ZonedDateTime? = null
 
     suspend fun fetchRecommendedVaccines() {
@@ -91,6 +91,17 @@ class AddScheduledVaccinationViewModel(private val httpService: HttpService) : V
 
     fun getCurrentDoseNumber (): Int {
         return doseNumber.value!!
+    }
+
+    fun isVaccinationNonExisting(): Boolean {
+        return alreadyScheduledVaccinations.none {
+            it.vaccine.id == recommendedVaccines[chosenVaccineIndex.value!!].id &&
+            it.doseNumber == doseNumber.value!!
+        }
+    }
+
+    fun areAllFieldsValid(): Boolean {
+        return chosenVaccineIndex.value != null && chosenZonedDateTime.value != null
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

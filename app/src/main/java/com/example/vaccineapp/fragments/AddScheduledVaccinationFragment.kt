@@ -18,6 +18,7 @@ import com.example.vaccineapp.R
 import com.example.vaccineapp.databinding.FragmentAddScheduledVaccinationBinding
 import com.example.vaccineapp.domain.Reminder
 import com.example.vaccineapp.domain.ReminderPostRequest
+import com.example.vaccineapp.utils.showSnackBar
 import com.example.vaccineapp.viewmodel.AddScheduledVaccinationViewModel
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -61,6 +62,9 @@ class AddScheduledVaccinationFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.btnSubmit.isEnabled = false
+
         lifecycleScope.launch {
             viewModel.fetchRecommendedVaccines()
             initDropdownMenu()
@@ -76,6 +80,14 @@ class AddScheduledVaccinationFragment : Fragment() {
             binding.tvWelcome.text = it
         }
 
+        viewModel.chosenZonedDateTime.observe(viewLifecycleOwner) {
+            binding.btnSubmit.isEnabled = viewModel.areAllFieldsValid()
+        }
+
+        viewModel.chosenVaccineIndex.observe(viewLifecycleOwner) {
+            binding.btnSubmit.isEnabled = viewModel.areAllFieldsValid()
+        }
+
 
         binding.pickDate.setOnClickListener {
             getSelectedDateTime()
@@ -88,6 +100,10 @@ class AddScheduledVaccinationFragment : Fragment() {
 
 
         binding.btnSubmit.setOnClickListener {
+            if (!viewModel.isVaccinationNonExisting()){
+                showSnackBar("Vaccination already exists", true)
+                return@setOnClickListener
+            }
             if (viewModel.isThereNextDose()) {
                 lifecycleScope.launch {
                     viewModel.postScheduledVaccination()
