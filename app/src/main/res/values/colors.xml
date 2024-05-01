@@ -23,4 +23,8 @@
     <color name="snackBarSuccessful">#7CB342</color>
     <color name="snackBarError">#E53935</color>
 
+    <color name="orangeAccent">#FFA500</color>
+    <color name="redAccent">#FF0000</color>
+    <color name="green_blueish">@color/DARK_fielcolor</color>
+
 </resources>

@@ -13,7 +13,9 @@ import android.graphics.Shader
 import android.graphics.Color
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.vaccineapp.R
 import com.example.vaccineapp.domain.ScheduledVaccinationGetRequest
 import com.example.vaccineapp.viewmodel.MainMenuViewModel
 import kotlinx.coroutines.launch
@@ -22,7 +24,7 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 
-class MainMenuFragment : Fragment() {
+class DashboardFragment : Fragment() {
 
 
     private var _binding: FragmentDashboardBinding? = null
@@ -42,11 +44,11 @@ class MainMenuFragment : Fragment() {
         val width = paint.measureText(clock.text.toString())
 
         val textShader: Shader = LinearGradient(0f, 0f, width, clock.textSize, intArrayOf(
-            Color.parseColor("#F97C3C"),
-            Color.parseColor("#FDB54E"),
-            Color.parseColor("#64B678"),
-            Color.parseColor("#478AEA"),
-            Color.parseColor("#8446CC"),
+            ContextCompat.getColor(requireContext(), R.color.redAccent),
+            ContextCompat.getColor(requireContext(), R.color.orangeAccent),
+            ContextCompat.getColor(requireContext(), R.color.orangeAccent),
+            ContextCompat.getColor(requireContext(), R.color.orangeAccent),
+            ContextCompat.getColor(requireContext(), R.color.white),
         ), null, Shader.TileMode.CLAMP)
 
         clock.paint.shader = textShader
@@ -71,7 +73,7 @@ class MainMenuFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = MainMenuFragment()
+        fun newInstance() = DashboardFragment()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

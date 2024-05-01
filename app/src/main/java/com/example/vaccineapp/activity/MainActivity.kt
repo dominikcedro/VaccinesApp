@@ -4,16 +4,10 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.vaccineapp.R
@@ -64,11 +58,11 @@ class MainActivity : AppCompatActivity() {
 
         bottomNav.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.new_vaccine -> {
+                R.id.scheduled -> {
                     navController.navigate(R.id.ScheduledVaccinationsFragment)
                     true
                 }
-                R.id.calendar -> {
+                R.id.dashboard -> {
                     navController.navigate(R.id.mainMenuFragment)
                     true
                 }
@@ -79,5 +73,7 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+        bottomNav.selectedItemId = R.id.dashboard
+
     }
 }

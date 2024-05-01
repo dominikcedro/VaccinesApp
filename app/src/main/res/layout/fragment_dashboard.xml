@@ -11,7 +11,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.MainMenuFragment"
+    tools:context=".fragments.DashboardFragment"
     android:background="?attr/android:windowBackground">
 
 
@@ -52,17 +52,17 @@
 
             <TextClock
                 android:id="@+id/clock"
-                android:layout_width="213dp"
-                android:layout_height="69dp"
-                android:layout_marginStart="68dp"
+                android:layout_width="290dp"
+                android:layout_height="92dp"
                 android:layout_marginTop="32dp"
+                android:background="?attr/android:background"
+                android:fontFamily="@font/archivo_black"
                 android:format12Hour="HH:mm"
                 android:format24Hour="HH:mm"
-                android:textSize="45sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/archivo_black"
-                android:background="?attr/android:background"
                 android:gravity="center"
+                android:textSize="70sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

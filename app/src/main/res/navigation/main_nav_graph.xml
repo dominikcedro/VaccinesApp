@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/mainMenuFragment"
-        android:name="com.example.vaccineapp.fragments.MainMenuFragment"
+        android:name="com.example.vaccineapp.fragments.DashboardFragment"
         tools:layout="@layout/fragment_dashboard"
         android:label="MainMenuFragment" >
         <action
