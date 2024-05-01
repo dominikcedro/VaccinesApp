@@ -15,10 +15,13 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.vaccineapp.R
 import com.example.vaccineapp.domain.ScheduledVaccinationGetRequest
 import com.example.vaccineapp.viewmodel.MainMenuViewModel
+import com.example.vaccineapp.viewmodel.ScheduledVaccinationViewModel
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -30,6 +33,10 @@ class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainMenuViewModel by viewModel()
+
+    private val scheduledVaccinationViewModel: ScheduledVaccinationViewModel by sharedViewModel()
+    private var closestVaccine: ScheduledVaccinationGetRequest? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,6 +68,7 @@ class DashboardFragment : Fragment() {
         _binding = null
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
@@ -69,6 +77,14 @@ class DashboardFragment : Fragment() {
             for (vaccination in vaccinationsToConfirm) {
                 confirmVaccinationDialog(vaccination)
             }
+
+            scheduledVaccinationViewModel.getScheduledVaccinations()
+            closestVaccine = scheduledVaccinationViewModel.scheduledVaccinations.minByOrNull { it.dateTime }
+            _binding?.closestVaccineCard?.setOnClickListener {
+                findNavController().navigate(R.id.action_mainMenuFragment_to_ScheduledVaccinationsFragment)
+            }
+            _binding?.closestVaccineName?.text = closestVaccine?.vaccine?.name
+            _binding?.closestVaccineName?.setTextColor(ContextCompat.getColor(requireContext(), R.color.orangeAccent))
         }
     }
 
