@@ -6,7 +6,7 @@
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/LIGHT_primarycolor</item>
         <item name="colorPrimaryVariant">@color/LIGHT_darkcolor</item>
-        <item name="colorOnPrimary">@color/orangeAccent</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/LIGHT_darkcolor</item>
         <item name="colorSecondaryVariant">@color/red</item>
@@ -50,6 +50,7 @@
     <!--    bbottom bavigation drawer -->
     <style name="BottomNavigationTheme" parent="Theme.VaccineApp">
         <item name="colorOnPrimary">@color/orangeAccent</item>
+
     </style>
 
 </resources>

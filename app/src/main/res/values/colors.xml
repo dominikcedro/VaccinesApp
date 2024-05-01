@@ -28,3 +28,35 @@
     <color name="green_blueish">@color/DARK_fielcolor</color>
 
 </resources>
+<!--    <?xml version="1.0" encoding="utf-8"?>-->
+<!--<resources>-->
+<!--&lt;!&ndash; Light theme colors &ndash;&gt;-->
+<!--<color name="LIGHT_primarycolor">#6200EE</color>-->
+<!--<color name="LIGHT_primaryVariant">#3700B3</color>-->
+<!--<color name="LIGHT_secondarycolor">#03DAC6</color>-->
+<!--<color name="LIGHT_backgroundcolor">#FFFFFF</color>-->
+<!--<color name="LIGHT_surfacecolor">#FFFFFF</color>-->
+<!--<color name="LIGHT_errorcolor">#B00020</color>-->
+<!--<color name="LIGHT_onPrimarycolor">#FFFFFF</color>-->
+<!--<color name="LIGHT_onSecondarycolor">#000000</color>-->
+<!--<color name="LIGHT_onBackgroundcolor">#000000</color>-->
+<!--<color name="LIGHT_onSurfacecolor">#000000</color>-->
+<!--<color name="LIGHT_onErrorcolor">#FFFFFF</color>-->
+<!--<color name="LIGHT_darkcolor">#121212</color>-->
+<!--<color name="orangeAccent">#FF5722</color>-->
+<!--<color name="bottom_nav_item_color">#FFFFFF</color>-->
+<!--<color name="transparent">#00000000</color>-->
+
+<!--&lt;!&ndash; Dark theme colors &ndash;&gt;-->
+<!--<color name="DARK_primarycolor">#BB86FC</color>-->
+<!--<color name="DARK_primaryVariant">#3700B3</color>-->
+<!--<color name="DARK_secondarycolor">#03DAC6</color>-->
+<!--<color name="DARK_backgroundcolor">#121212</color>-->
+<!--<color name="DARK_surfacecolor">#121212</color>-->
+<!--<color name="DARK_errorcolor">#CF6679</color>-->
+<!--<color name="DARK_onPrimarycolor">#000000</color>-->
+<!--<color name="DARK_onSecondarycolor">#000000</color>-->
+<!--<color name="DARK_onBackgroundcolor">#FFFFFF</color>-->
+<!--<color name="DARK_onSurfacecolor">#FFFFFF</color>-->
+<!--<color name="DARK_onErrorcolor">#000000</color>-->
+<!--</resources>-->

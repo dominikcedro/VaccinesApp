@@ -17,7 +17,7 @@
     <item name="android:background">@color/DARK_backgroundcolor</item>
     <item name="android:textColor">@color/white</item>
     <item name="android:windowBackground">@drawable/gradient_background_dark</item>
-
+    <item name="colorSurface">@color/orangeAccent</item>
 </style>
 
 <style name="Theme.VaccineApp.NoActionBar">
@@ -54,5 +54,8 @@
     <item name="android:textColorPrimary">@color/black</item> <!-- Text color -->
 </style>
 
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">?attr/android:background</item>
+    </style>
 
 </resources>
