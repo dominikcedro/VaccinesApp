@@ -14,7 +14,10 @@ class StartActivity : AppCompatActivity() {
 
         // After 5 seconds, navigate from LogoFragment to LoginFragment
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController(R.id.nav_host_fragment).navigate(R.id.action_logoFragment_to_loginFragment)
-        }, 5000) // 5 seconds delay
+            val navController = findNavController(R.id.nav_host_fragment)
+            if (navController.currentDestination?.id != R.id.loginFragment) {
+                navController.navigate(R.id.action_logoFragment_to_loginFragment)
+            }
+        }, 3000) // 5 seconds delay
     }
 }

@@ -1,21 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.VaccineApp" parent="Theme.Material3.Light.NoActionBar">
-        <!-- Primary brand color. -->
+
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryVariant">@color/darkColor</item>
+        <item name="colorPrimary">@color/LIGHT_primarycolor</item>
+        <item name="colorPrimaryVariant">@color/LIGHT_darkcolor</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/darkColor</item>
+        <item name="colorSecondary">@color/LIGHT_darkcolor</item>
         <item name="colorSecondaryVariant">@color/red</item>
         <item name="colorOnSecondary">@color/red</item>
-        <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:background">@color/backgroundColor</item>
-        <item name="android:textColor">@color/darkColor</item>
+        <item name="android:background">@color/LIGHT_backgroundcolor</item>  <!-- used as background for cards -->
+
+        <item name="android:textColor">@color/LIGHT_darkcolor</item>
+        <item name="android:windowBackground">@drawable/gradient_background_light</item>
     </style>
 
     <style name="Theme.VaccineApp.NoActionBar">
@@ -29,7 +30,7 @@
 
 <!--    button styles -->
     <style name="ButtonTheme" parent="ThemeOverlay.AppCompat">
-        <item name="colorAccent">@color/primaryColor</item>
+        <item name="colorAccent">@color/LIGHT_primarycolor</item>
     </style>
 
     <style name="DatePickerTheme" parent="Theme.VaccineApp">
@@ -37,5 +38,11 @@
         <item name="android:textColorPrimary">@color/black</item> <!-- Text color -->
     </style>
 
+    <style name="HeaderTextView" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">36sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
 
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 </resources>

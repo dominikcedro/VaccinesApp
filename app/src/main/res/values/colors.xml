@@ -9,11 +9,16 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="red">#FF0000</color>
-<!-- color theme for the app   -->
-    <color name="darkColor">#112D4E</color>
-    <color name="primaryColor">#3F72AF</color>
-    <color name="fieldColor">#DBE2EF</color>
-    <color name="backgroundColor">#F9F7F7</color>
+<!-- color theme for the app light -->
+    <color name="LIGHT_darkcolor">#112D4E</color>
+    <color name="LIGHT_primarycolor">#3F72AF</color>
+    <color name="LIGHT_fieldcolor">#DBE2EF</color>
+    <color name="LIGHT_backgroundcolor">#F9F7F7</color>
+    <!-- color theme for the app dark   -->
+    <color name="DARK_darkcolor">#9EC8B9</color>
+    <color name="DARK_primarycolor">#5C8374</color>
+    <color name="DARK_fielcolor">#1B4242</color>
+    <color name="DARK_backgroundcolor">#092635</color>
 
     <color name="snackBarSuccessful">#7CB342</color>
     <color name="snackBarError">#E53935</color>
