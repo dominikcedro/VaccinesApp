@@ -5,11 +5,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background_light"
+    android:background="?attr/android:windowBackground"
     tools:context=".fragments.RegisterFragment">
 
     <TextView
         android:id="@+id/tvRegisterWelcome"
+        style="@style/HeaderTextView"
         android:layout_width="392dp"
         android:layout_height="55dp"
         android:layout_marginStart="16dp"
@@ -18,9 +19,6 @@
         android:width="200dp"
         android:height="60dp"
         android:text="Create new account"
-        android:textAlignment="center"
-        android:textSize="36sp"
-        android:textStyle="bold"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

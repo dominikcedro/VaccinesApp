@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.AdministeredVaccinationsFragment"
-    android:background="@drawable/gradient_background_light">
+    android:background="?attr/android:windowBackground">
 
 
     <TextView
         android:id="@+id/userVaccinesTV"
+        style="@style/HeaderTextView"
         android:layout_width="392dp"
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
@@ -19,9 +20,6 @@
         android:height="60dp"
         android:background="@android:color/transparent"
         android:text="Administered"
-        android:textAlignment="center"
-        android:textSize="36sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
