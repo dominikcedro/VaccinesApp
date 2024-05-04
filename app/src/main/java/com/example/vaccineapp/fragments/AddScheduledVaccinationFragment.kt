@@ -27,6 +27,7 @@ import com.google.android.material.timepicker.TimeFormat
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.Instant
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.OffsetDateTime
@@ -128,10 +129,12 @@ class AddScheduledVaccinationFragment : Fragment() {
             }
         }
     }
-
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getSelectedDateTime(){
         val datePickerBuilder = MaterialDatePicker.Builder.datePicker()
+        val constraintsBuilder = CalendarConstraints.Builder()
+        constraintsBuilder.setStart(MaterialDatePicker.todayInUtcMilliseconds())
+
         if (viewModel.getCurrentDoseNumber() > 1){
             val oneWeek = Period.ofWeeks(1)
             val recommendedDate = viewModel.getRecommendedDateForDose()
@@ -139,40 +142,45 @@ class AddScheduledVaccinationFragment : Fragment() {
             val startDate = recommendedDate!!.minus(oneWeek).toInstant().toEpochMilli()
             val endDate = recommendedDate.plus(oneWeek).toInstant().toEpochMilli()
 
-            val constraintsBuilder = CalendarConstraints.Builder()
-                .setStart(startDate)
+            constraintsBuilder
+                .setStart(maxOf(startDate, MaterialDatePicker.todayInUtcMilliseconds()))
                 .setEnd(endDate)
-
-            val constraints = constraintsBuilder.build()
-            datePickerBuilder.setCalendarConstraints(constraints)
-
         }
+
+        val constraints = constraintsBuilder.build()
+        datePickerBuilder.setCalendarConstraints(constraints)
+
         val datePicker = datePickerBuilder.build()
 
         datePicker.addOnPositiveButtonClickListener { selectedDate ->
             val date = Instant.ofEpochMilli(selectedDate).atZone(ZoneId.systemDefault()).toLocalDate()
+            val today = LocalDate.now(ZoneId.systemDefault())
+            if (date.isBefore(today)) {
+                showSnackBar("Past dates not allowed", true)
+            } else {
+                val timePicker = MaterialTimePicker.Builder()
+                    .setTimeFormat(TimeFormat.CLOCK_12H)
+                    .setTheme(R.style.TimePickerTheme) // theme fr timepicker TODO check what fails to set proper colors
+                    .build()
+                timePicker.addOnPositiveButtonClickListener {
+                    val hour = timePicker.hour
+                    val minute = timePicker.minute
+                    val localTime = LocalTime.of(hour, minute)
+                    val localDateTime = LocalDateTime.of(date, localTime)
 
+                    val zoneOffset = OffsetDateTime.now(ZoneId.systemDefault()).offset
+                    val zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.of(zoneOffset.id))
 
-            val timePicker = MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_24H).build()
-            timePicker.addOnPositiveButtonClickListener {
-                val hour = timePicker.hour
-                val minute = timePicker.minute
-                val localTime = LocalTime.of(hour, minute)
-                val localDateTime = LocalDateTime.of(date, localTime)
+                    viewModel.setChosenZonedDateTime(zonedDateTime)
+                    val formatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd")
 
-                val zoneOffset = OffsetDateTime.now(ZoneId.systemDefault()).offset
-                val zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.of(zoneOffset.id))
-
-                viewModel.setChosenZonedDateTime(zonedDateTime)
-                val formatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd")
-
-                binding.pickDate.setText(zonedDateTime.format(formatter))
+                    binding.pickDate.setText(zonedDateTime.format(formatter))
+                }
+                timePicker.show(childFragmentManager, "time_picker")
             }
-            timePicker.show(childFragmentManager, "time_picker")
         }
         datePicker.show(childFragmentManager, "date_picker")
     }
-
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setDateTimeForReminder(reminder: Reminder) {
         val datePicker = MaterialDatePicker.Builder.datePicker().build()

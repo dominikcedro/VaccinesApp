@@ -85,7 +85,7 @@ class AddAdministeredVaccineFragment : Fragment() {
         }
 
         binding.pickTime.setOnClickListener {
-            val timePicker = MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_24H).build()
+            val timePicker = MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_12H).build()
             timePicker.addOnPositiveButtonClickListener {
                 val hour = String.format("%02d", timePicker.hour)
                 val minute = String.format("%02d", timePicker.minute)
