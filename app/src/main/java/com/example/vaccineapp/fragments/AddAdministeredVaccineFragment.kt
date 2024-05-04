@@ -26,6 +26,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.Instant
 import java.time.Instant.ofEpochMilli
+import java.time.LocalDate
 import java.time.ZoneId
 import kotlin.math.log
 
@@ -71,9 +72,14 @@ class AddAdministeredVaccineFragment : Fragment() {
 
             datePicker.addOnPositiveButtonClickListener { selectedDate ->
                 val date = ofEpochMilli(selectedDate).atZone(ZoneId.systemDefault()).toLocalDate()
-                val dateString = date.toString()
-                viewModel.setChosenDate(dateString)
-                binding.pickDate.setText(dateString)
+                val today = LocalDate.now(ZoneId.systemDefault())
+                if (date.isAfter(today)) {
+                    showSnackBar("Future dates not allowed", true)
+                } else {
+                    val dateString = date.toString()
+                    viewModel.setChosenDate(dateString)
+                    binding.pickDate.setText(dateString)
+                }
             }
             datePicker.show(childFragmentManager, "date_picker")
         }
@@ -96,14 +102,16 @@ class AddAdministeredVaccineFragment : Fragment() {
         }
 
         binding.btnSubmit.setOnClickListener {
-            if (!viewModel.isVaccinationNonExisting()) {
-                showSnackBar("Vaccination already exists", true)
-                return@setOnClickListener
-            }
             if (!viewModel.areAllFieldsValid()) {
                 showSnackBar("Please fill in all fields", true)
                 return@setOnClickListener
             }
+
+            if (!viewModel.isVaccinationNonExisting()) {
+                showSnackBar("Vaccination already exists", true)
+                return@setOnClickListener
+            }
+
             if (!viewModel.isDoseNumberValidForChosenVaccine()) {
                 showSnackBar("Invalid dose number", true)
                 return@setOnClickListener

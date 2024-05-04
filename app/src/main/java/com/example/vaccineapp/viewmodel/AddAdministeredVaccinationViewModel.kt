@@ -23,7 +23,6 @@ class AddAdministeredVaccinationViewModel(private val httpService: HttpService):
     private val chosenVaccineIndex = MutableLiveData<Int>()
     private val chosenDate = MutableLiveData<LocalDate>()
     private val chosenTime = MutableLiveData<LocalTime>()
-
     private val doseNumber = MutableLiveData<Int>()
 
     suspend fun fetchVaccines() {
@@ -59,9 +58,10 @@ class AddAdministeredVaccinationViewModel(private val httpService: HttpService):
     }
 
     fun isVaccinationNonExisting(): Boolean {
+        val chosenVaccineId = vaccines[chosenVaccineIndex.value ?: return false].id
         return alreadyAdministeredVaccinations.none {
-            it.vaccine.id == vaccines[chosenVaccineIndex.value!!].id &&
-            it.doseNumber == doseNumber.value!!
+            it.vaccine.id == chosenVaccineId &&
+                    it.doseNumber == doseNumber.value
         }
     }
     fun areAllFieldsValid(): Boolean {
@@ -69,23 +69,23 @@ class AddAdministeredVaccinationViewModel(private val httpService: HttpService):
     }
 
     fun isDoseNumberValidForChosenVaccine(): Boolean {
-        return doseNumber.value!! <= vaccines[chosenVaccineIndex.value!!].doses.size
+        val chosenVaccineDoses = vaccines[chosenVaccineIndex.value ?: return false].doses.size
+        return doseNumber.value?.let { it <= chosenVaccineDoses } ?: false
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun postVaccination() {
+        val chosenVaccineId = vaccines[chosenVaccineIndex.value ?: return].id
+        val chosenDoseNumber = doseNumber.value ?: return
+        val chosenDateValue = chosenDate.value ?: return
+        val chosenTimeValue = chosenTime.value ?: return
+
         viewModelScope.launch {
-            val vaccineId = vaccines[chosenVaccineIndex.value!!].id
-            val doseNumber = doseNumber.value!!
-
-            // Create a ZonedDateTime object from the chosen date and time
-            val dateTime = LocalDateTime.of(chosenDate.value, chosenTime.value).atZone(ZoneId.systemDefault())
-
-            // Format the ZonedDateTime object to a string
+            val dateTime = LocalDateTime.of(chosenDateValue, chosenTimeValue).atZone(ZoneId.systemDefault())
             val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ")
             val formattedDateTime = dateTime.format(dateTimeFormatter)
 
-            val administeredVaccine = AdministeredVaccinePostRequest(vaccineId, doseNumber, formattedDateTime)
+            val administeredVaccine = AdministeredVaccinePostRequest(chosenVaccineId, chosenDoseNumber, formattedDateTime)
             httpService.addAdministeredVaccine(administeredVaccine)
         }
     }
