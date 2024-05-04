@@ -98,7 +98,6 @@ class DashboardFragment : Fragment() {
             closestVaccine = scheduledVaccinationViewModel.scheduledVaccinations.minByOrNull { it.dateTime }
             if (closestVaccine != null) {
                 _binding?.closestVaccineName?.text = closestVaccine?.vaccine?.name
-                _binding?.closestVaccineName?.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.orangeAccent))
             }
             _binding?.closestVaccineCard?.setOnClickListener {
                 findNavController().navigate(R.id.action_mainMenuFragment_to_ScheduledVaccinationsFragment)
