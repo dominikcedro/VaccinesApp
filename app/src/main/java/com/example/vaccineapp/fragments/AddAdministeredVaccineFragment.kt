@@ -18,6 +18,7 @@ import com.example.vaccineapp.R
 import com.example.vaccineapp.databinding.FragmentAddAdministeredVaccineBinding
 import com.example.vaccineapp.utils.showSnackBar
 import com.example.vaccineapp.viewmodel.AddAdministeredVaccinationViewModel
+import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -61,7 +62,13 @@ class AddAdministeredVaccineFragment : Fragment() {
 
 
         binding.pickDate.setOnClickListener {
-            val datePicker = MaterialDatePicker.Builder.datePicker().build()
+            val constraintsBuilder = CalendarConstraints.Builder()
+            constraintsBuilder.setEnd(MaterialDatePicker.todayInUtcMilliseconds())
+
+            val datePicker = MaterialDatePicker.Builder.datePicker()
+                .setCalendarConstraints(constraintsBuilder.build())
+                .build()
+
             datePicker.addOnPositiveButtonClickListener { selectedDate ->
                 val date = ofEpochMilli(selectedDate).atZone(ZoneId.systemDefault()).toLocalDate()
                 val dateString = date.toString()

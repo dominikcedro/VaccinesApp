@@ -60,6 +60,7 @@
                     android:id="@+id/chooseVaccineTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?attr/android:background"
                     android:hint="Choose vaccine type"
                     android:inputType="none"/>
 
@@ -85,7 +86,6 @@
                 android:layout_height="71dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="24dp"
-                android:background="@drawable/button_background"
                 android:text="Submit"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
