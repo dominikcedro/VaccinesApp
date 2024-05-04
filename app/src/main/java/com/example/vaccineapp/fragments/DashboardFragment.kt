@@ -17,6 +17,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.vaccineapp.R
 import com.example.vaccineapp.domain.ScheduledVaccinationGetRequest
 import com.example.vaccineapp.viewmodel.MainMenuViewModel
@@ -78,6 +79,14 @@ class DashboardFragment : Fragment() {
             newsArticleViewModel.fetchArticle()
             newsArticleViewModel.article.observe(viewLifecycleOwner) { newsArticle ->
                 _binding?.newsArticleTitleTextView?.text = newsArticle.title
+                val imageView = _binding?.newsArticleImageView
+                val urlToImage = newsArticle.urlToImage
+                if (urlToImage != null && imageView != null) {
+                    Glide.with(requireContext())
+                        .load(urlToImage)
+                        .into(imageView)
+
+                }
             }
             viewModel.fetchVaccinationsToConfirm()
             val vaccinationsToConfirm = viewModel.getVaccinationsToConfirm()

@@ -78,6 +78,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/clock" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/newsSectionTV"
+                android:layout_width="285dp"
+                android:layout_height="29dp"
+                android:layout_marginTop="12dp"
+                android:text="Vaccine news: "
+                android:textAlignment="textStart"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/closestVaccineCard" />
+
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/closestVaccineCard"
                 android:layout_width="match_parent"
@@ -102,12 +115,22 @@
 
             <TextView
                 android:id="@+id/newsArticleTitleTextView"
-                android:layout_width="220dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="64dp"
-                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/closestVaccineCard"/>
+                app:layout_constraintTop_toBottomOf="@+id/newsSectionTV" />
+
+            <ImageView
+                android:id="@+id/newsArticleImageView"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="124dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/newsArticleTitleTextView" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
