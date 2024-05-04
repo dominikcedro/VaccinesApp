@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="No vaccines scheduled"
-                    android:background="?attr/colorPrimary"
+                    android:background="transparent"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
             </com.google.android.material.card.MaterialCardView>
