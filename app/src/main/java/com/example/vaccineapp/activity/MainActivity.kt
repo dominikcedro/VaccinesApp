@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         NavigationUI.setupWithNavController(bottomNav, navController)
 
+
         bottomNav.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.scheduled -> {
@@ -75,5 +76,12 @@ class MainActivity : AppCompatActivity() {
         }
         bottomNav.selectedItemId = R.id.dashboard
 
+//        navController.addOnDestinationChangedListener { _, destination, _ ->
+//            when (destination.id) {
+//                R.id.ScheduledVaccinationsFragment -> bottomNav.selectedItemId = R.id.scheduled
+//                R.id.mainMenuFragment -> bottomNav.selectedItemId = R.id.dashboard
+//                R.id.administeredVaccinationsFragment -> bottomNav.selectedItemId = R.id.administered
+//            }
+//        }
     }
 }
