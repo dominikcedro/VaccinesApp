@@ -1,5 +1,6 @@
 package com.example.vaccineapp.fragments
 
+import NewsArticleViewModel
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -37,6 +38,8 @@ class DashboardFragment : Fragment() {
     private val scheduledVaccinationViewModel: ScheduledVaccinationViewModel by sharedViewModel()
     private var closestVaccine: ScheduledVaccinationGetRequest? = null
 
+    private val newsArticleViewModel: NewsArticleViewModel by viewModel()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,6 +75,10 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
+            newsArticleViewModel.fetchArticle()
+            newsArticleViewModel.article.observe(viewLifecycleOwner) { newsArticle ->
+                _binding?.newsArticleTitleTextView?.text = newsArticle.title
+            }
             viewModel.fetchVaccinationsToConfirm()
             val vaccinationsToConfirm = viewModel.getVaccinationsToConfirm()
             for (vaccination in vaccinationsToConfirm) {

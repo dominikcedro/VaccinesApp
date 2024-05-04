@@ -5,6 +5,8 @@ import com.example.vaccineapp.auth.RegistrationRequest
 import com.example.vaccineapp.auth.LogoutRequest
 import com.example.vaccineapp.domain.AdministeredVaccinationGetRequest
 import com.example.vaccineapp.domain.AdministeredVaccinePostRequest
+import com.example.vaccineapp.domain.NewsArticle
+import com.example.vaccineapp.domain.NewsResponse
 import com.example.vaccineapp.domain.ScheduledVaccinationGetRequest
 import com.example.vaccineapp.domain.ScheduledVaccinationPostRequest
 import com.example.vaccineapp.domain.Vaccine
@@ -111,6 +113,13 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
     suspend fun deleteScheduledVaccination(scheduledVaccinationId: Long) {
         val url = "$usersServiceUrl/vaccination/schedule/$scheduledVaccinationId"
         defaultHttpClient.delete(url)
+    }
+
+    suspend fun fetchNewsArticle(): NewsArticle {
+        val url = "https://newsapi.org/v2/everything?q=vaccines&apiKey=e888e885c27e4d5dbaa85c123c175c0e&pageSize=1"
+        val response: HttpResponse = noAuthHttpClient.get(url)
+        val newsResponse = response.body<NewsResponse>()
+        return newsResponse.articles[0]
     }
 
 }

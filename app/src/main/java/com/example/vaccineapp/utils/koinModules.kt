@@ -1,6 +1,7 @@
 package com.example.vaccineapp.utils
 
 import HttpService
+import NewsArticleViewModel
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -110,4 +111,6 @@ val viewModelModule = module {
     single { AddScheduledVaccinationViewModel(get()) }
     single { ScheduledVaccinationViewModel(get()) }
     single { MainMenuViewModel(get()) }
+    single { NewsArticleViewModel(get()) }
+
 }

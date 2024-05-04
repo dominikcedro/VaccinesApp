@@ -95,10 +95,20 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="No vaccines scheduled"
-                    android:background="transparent"
+                    android:background="@android:color/transparent"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
             </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/newsArticleTitleTextView"
+                android:layout_width="220dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/closestVaccineCard"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
