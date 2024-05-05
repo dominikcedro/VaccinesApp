@@ -81,6 +81,13 @@ class RegisterFragment : Fragment() {
             }
         }
 
+        binding.etRegisterPass2.addTextChangedListener { text ->
+            viewModel.updateConfirmPassword(text.toString())
+            if (!viewModel.isConfirmPasswordValid()) {
+                //TODO
+            }
+        }
+
         binding.etDOB.setOnClickListener {
             getSelectedDate()
         }
@@ -88,6 +95,8 @@ class RegisterFragment : Fragment() {
 
         viewModel.isAllFieldsValid.observe(viewLifecycleOwner) { isValid ->
             binding.registerButton.isEnabled = isValid
+            binding.registerButton.isEnabled = true
+
         }
 
         binding.registerButton.setOnClickListener {
@@ -105,7 +114,11 @@ class RegisterFragment : Fragment() {
                 }
 
                 RegisterViewModel.AuthenticationState.AUTHENTICATED -> {
-                    binding.registerButton.isEnabled = true
+                    binding.registerButton.isEnabled = true // why???
+                    // TODO snackbar and
+                    showSnackBar("Register successful!", false)
+
+                    //  viewModel.updateNotificationToken()????
                     val intent = Intent(requireContext(), MainActivity::class.java)
                     startActivity(intent)
                     activity?.finish()
@@ -113,6 +126,8 @@ class RegisterFragment : Fragment() {
 
                 RegisterViewModel.AuthenticationState.FAILED -> {
                     binding.registerButton.isEnabled = true
+                    showSnackBar("Register not successful!", true)
+
                 }
                 null -> {
                     binding.registerButton.isEnabled = true
