@@ -146,6 +146,14 @@ class RegisterViewModel(private val tokenManager: TokenManager,
     fun isConfirmPasswordValid(): Boolean {
         return validator.isValidConfirmPassword(password.value ?: "", confirmPassword.value ?: "")
     }
+    /**
+     * Checks if the date of birth is valid.
+     *
+     * @return True if the date of birth is valid, false otherwise.
+     */
+    fun isDoBValid(): Boolean {
+        return validator.isNotBlank(DoB.value ?: "")
+    }
 
     /**
      * Checks the form validity.
@@ -155,7 +163,8 @@ class RegisterViewModel(private val tokenManager: TokenManager,
                 isLastNameValid() &&
                 isEmailValid() &&
                 isPasswordValid() &&
-                isConfirmPasswordValid()
+                isConfirmPasswordValid() &&
+                isDoBValid()
     }
 
     /**

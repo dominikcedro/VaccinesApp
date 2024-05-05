@@ -12,4 +12,8 @@
         android:id="@+id/scheduled"
         android:title="Scheduled"
         android:icon="@drawable/ic_add_new_vaccine"/>
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"/>
 </menu>

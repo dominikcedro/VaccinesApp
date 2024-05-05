@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.vaccineapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.viewpager2.widget.ViewPager2
 
 /**
  * Main activity for the app.
@@ -72,6 +73,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.administered -> {
                     navController.navigate(R.id.administeredVaccinationsFragment)
+                    true
+                }
+                R.id.settings -> {
+                    navController.navigate(R.id.settingsFragment)
                     true
                 }
                 else -> false
