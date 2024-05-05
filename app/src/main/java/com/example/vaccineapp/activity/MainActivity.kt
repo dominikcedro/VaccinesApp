@@ -13,6 +13,7 @@ import androidx.navigation.ui.NavigationUI
 import com.example.vaccineapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.viewpager2.widget.ViewPager2
+import com.example.vaccineapp.fragments.SectionsPagerAdapter
 
 /**
  * Main activity for the app.
@@ -84,12 +85,30 @@ class MainActivity : AppCompatActivity() {
         }
         bottomNav.selectedItemId = R.id.dashboard
 
-//        navController.addOnDestinationChangedListener { _, destination, _ ->
-//            when (destination.id) {
-//                R.id.ScheduledVaccinationsFragment -> bottomNav.selectedItemId = R.id.scheduled
-//                R.id.mainMenuFragment -> bottomNav.selectedItemId = R.id.dashboard
-//                R.id.administeredVaccinationsFragment -> bottomNav.selectedItemId = R.id.administered
-//            }
-//        }
+
+
+        val viewPager: ViewPager2 = findViewById<ViewPager2>(R.id.viewPager)
+
+// Set up the ViewPager2 with the sections adapter.
+        val sectionsPagerAdapter = SectionsPagerAdapter(this)
+        viewPager.adapter = sectionsPagerAdapter
+
+// Set up the ViewPager2's page change callback.
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                bottomNav.menu.getItem(position).isChecked = true
+            }
+        })
+
+// Set up the BottomNavigationView's selected item listener.
+        bottomNav.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.administered -> viewPager.currentItem = 0
+                R.id.dashboard -> viewPager.currentItem = 1
+                R.id.scheduled -> viewPager.currentItem = 2
+                R.id.settings -> viewPager.currentItem = 3
+            }
+            true
+        }
     }
 }
