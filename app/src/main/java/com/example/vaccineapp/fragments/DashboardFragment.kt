@@ -2,6 +2,7 @@ package com.example.vaccineapp.fragments
 
 import NewsArticleViewModel
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.example.vaccineapp.databinding.FragmentDashboardBinding
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.graphics.Color
+import android.net.Uri
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
@@ -60,9 +62,6 @@ class DashboardFragment : Fragment() {
         val textShader: Shader = LinearGradient(0f, 0f, width, clock.textSize, intArrayOf(
             ContextCompat.getColor(requireContext(), R.color.redAccent),
             ContextCompat.getColor(requireContext(), R.color.orangeAccent),
-            ContextCompat.getColor(requireContext(), R.color.orangeAccent),
-            ContextCompat.getColor(requireContext(), R.color.orangeAccent),
-            ContextCompat.getColor(requireContext(), R.color.white),
         ), null, Shader.TileMode.CLAMP)
 
         clock.paint.shader = textShader
@@ -80,17 +79,24 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             newsArticleViewModel.fetchArticle()
-            newsArticleViewModel.article.observe(viewLifecycleOwner) { newsArticle ->
-                _binding?.newsArticleTitleTextView?.text = newsArticle.title
-                val imageView = _binding?.newsArticleImageView
-                val urlToImage = newsArticle.urlToImage
-                if (urlToImage != null && imageView != null) {
-                    Glide.with(requireContext())
-                        .load(urlToImage)
-                        .into(imageView)
+                newsArticleViewModel.article.observe(viewLifecycleOwner) { newsArticle ->
+                    _binding?.newsArticleTitleTextView?.text = newsArticle.title
+                    val imageView = _binding?.newsArticleImageView
+                    val urlToImage = newsArticle.urlToImage
 
+                    if (urlToImage != null && imageView != null) {
+                        Glide.with(requireContext())
+                            .load(urlToImage)
+                            .into(imageView)
+
+                    }
+                    _binding?.newsArticlesCard?.setOnClickListener {
+                        // Create an Intent with the ACTION_VIEW action and the URL of the news article
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(newsArticle.url))
+                        // Start the Intent
+                        startActivity(intent)
+                    }
                 }
-            }
             viewModel.fetchVaccinationsToConfirm()
             val vaccinationsToConfirm = viewModel.getVaccinationsToConfirm()
             for (vaccination in vaccinationsToConfirm) {

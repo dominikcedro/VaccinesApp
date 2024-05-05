@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:fillViewport="true"
     android:paddingBottom="?attr/actionBarSize">
 
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".fragments.DashboardFragment"
     android:background="?attr/android:windowBackground">
 
@@ -48,14 +48,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="600dp"
-            android:background="?attr/android:background">
+            android:background="@android:color/transparent">
 
             <TextClock
                 android:id="@+id/clock"
-                android:layout_width="290dp"
-                android:layout_height="92dp"
-                android:layout_marginTop="32dp"
-                android:background="?attr/android:background"
+                android:layout_width="match_parent"
+                android:layout_height="107dp"
+                android:background="@android:color/transparent"
                 android:fontFamily="@font/archivo_black"
                 android:format12Hour="HH:mm"
                 android:format24Hour="HH:mm"
@@ -68,11 +67,14 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/nextVaccineTV"
-                android:layout_width="285dp"
-                android:layout_height="29dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:layout_marginStart="16dp"
                 android:text="Your next vaccine: "
+                android:background="@android:color/transparent"
                 android:textAlignment="textStart"
+                android:textSize="30sp"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -80,13 +82,15 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/newsSectionTV"
-                android:layout_width="285dp"
-                android:layout_height="29dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
+                android:background="@android:color/transparent"
                 android:text="Vaccine news: "
                 android:textAlignment="textStart"
+                android:textSize="30sp"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/closestVaccineCard" />
 
@@ -95,7 +99,7 @@
                 android:id="@+id/closestVaccineCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="?attr/colorPrimary"
+                app:cardBackgroundColor="?attr/colorOnPrimary"
                 android:layout_margin="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="47dp"
@@ -117,7 +121,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/newsArticlesCard"
-                app:cardBackgroundColor="?attr/colorPrimary"
+                app:cardBackgroundColor="?attr/colorOnPrimary"
                 android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -138,7 +142,6 @@
                     android:layout_height="0dp"
                     android:layout_marginBottom="12dp"
                     android:background="@android:color/transparent"
-                    app:layout_constraintBottom_toTopOf="@+id/newsArticleTitleTextView"
                     app:layout_constraintDimensionRatio="16:9"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -147,17 +150,17 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/newsArticleTitleTextView"
-                android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="sans-serif-light"
-            android:background="@android:color/transparent"
+                    android:id="@+id/newsArticleTitleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="sans-serif-light"
                     android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintStart_toEndOf="@+id/newsArticleImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/newsArticleImageView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

@@ -197,9 +197,9 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
      * @return The news article.
      */
     suspend fun fetchNewsArticle(): NewsArticle {
-        val url = "https://newsapi.org/v2/everything?q=vaccines&apiKey=e888e885c27e4d5dbaa85c123c175c0e&pageSize=1"
+        val url = "https://newsapi.org/v2/everything?q=vaccines&apiKey=e888e885c27e4d5dbaa85c123c175c0e&pageSize=10"
         val response: HttpResponse = noAuthHttpClient.get(url)
         val newsResponse = response.body<NewsResponse>()
-        return newsResponse.articles[0]
+        return newsResponse.articles.random()
     }
 }
