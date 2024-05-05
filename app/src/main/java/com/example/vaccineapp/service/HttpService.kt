@@ -86,13 +86,13 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
     }
 
     suspend fun fetchScheduledVaccines(): List<ScheduledVaccinationGetRequest> {
-        val url = "$usersServiceUrl/vaccination/schedule/user"
+        val url = "$usersServiceUrl/vaccination/scheduled/user"
         val response = defaultHttpClient.get(url)
         return response.body<List<ScheduledVaccinationGetRequest>>()
     }
 
     suspend fun postScheduledVaccination(scheduledVaccinationPostRequest: ScheduledVaccinationPostRequest) {
-        val url = "$usersServiceUrl/vaccination/schedule"
+        val url = "$usersServiceUrl/vaccination/scheduled"
         defaultHttpClient.post(url) {
             contentType(ContentType.Application.Json)
             setBody(scheduledVaccinationPostRequest)
