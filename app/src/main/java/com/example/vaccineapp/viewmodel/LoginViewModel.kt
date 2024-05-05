@@ -12,22 +12,50 @@ import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
+/**
+ * ViewModel for user login.
+ *
+ * @property tokenManager The token manager for handling user tokens.
+ * @property httpService The HTTP service for making network requests.
+ */
 class LoginViewModel(private val tokenManager: TokenManager, private val httpService: HttpService) : ViewModel() {
     private val email = MutableLiveData<String>("")
     private val password = MutableLiveData<String>("")
     val exceptionMessage = MutableLiveData<String>()
+
+    /**
+     * Represents the authentication state.
+     */
     val authenticationState = MutableLiveData<AuthenticationState>()
+
+    /**
+     * Enum class for representing the authentication state.
+     */
     enum class AuthenticationState {
         LOADING, AUTHENTICATED, FAILED
     }
+
+    /**
+     * Updates the email value.
+     *
+     * @param newEmail The new email value.
+     */
     fun updateEmail(newEmail: String) {
         email.value = newEmail
     }
 
+    /**
+     * Updates the password value.
+     *
+     * @param newPassword The new password value.
+     */
     fun updatePassword(newPassword: String) {
         password.value = newPassword
     }
 
+    /**
+     * Authenticates the user.
+     */
     fun authenticate() {
         viewModelScope.launch {
             authenticationState.value = AuthenticationState.LOADING
@@ -43,6 +71,9 @@ class LoginViewModel(private val tokenManager: TokenManager, private val httpSer
         }
     }
 
+    /**
+     * Updates the notification token.
+     */
     fun updateNotificationToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
@@ -55,11 +86,14 @@ class LoginViewModel(private val tokenManager: TokenManager, private val httpSer
                 httpService.updateNotificationToken(token)
             }
         })
-
     }
 
+    /**
+     * Checks if the user is logged in.
+     *
+     * @return True if the user is logged in, false otherwise.
+     */
     fun isUserLoggedIn(): Boolean {
         return !tokenManager.isRefreshTokenExpired();
     }
-
 }

@@ -9,6 +9,13 @@ import com.example.vaccineapp.service.TokenManager
 import com.example.vaccineapp.service.Validator
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel for user registration.
+ *
+ * @property tokenManager The token manager for handling user tokens.
+ * @property validator The validator for validating user input.
+ * @property httpService The HTTP service for making network requests.
+ */
 class RegisterViewModel(private val tokenManager: TokenManager,
                         private val validator: Validator,
                         private val httpService: HttpService
@@ -22,56 +29,117 @@ class RegisterViewModel(private val tokenManager: TokenManager,
     private val DoB = MutableLiveData<String>("")
     val isAllFieldsValid = MutableLiveData<Boolean>(false)
     val exceptionMessage = MutableLiveData<String>()
+
+    /**
+     * Represents the authentication state.
+     */
     val authenticationState = MutableLiveData<AuthenticationState>()
+
+    /**
+     * Enum class for representing the authentication state.
+     */
     enum class AuthenticationState {
         LOADING, AUTHENTICATED, FAILED
     }
 
+    /**
+     * Updates the email value.
+     *
+     * @param newEmail The new email value.
+     */
     fun updateEmail(newEmail: String) {
         email.value = newEmail
         checkFormValidity()
     }
 
+    /**
+     * Updates the password value.
+     *
+     * @param newPassword The new password value.
+     */
     fun updatePassword(newPassword: String) {
         password.value = newPassword
         checkFormValidity()
     }
 
+    /**
+     * Updates the confirm password value.
+     *
+     * @param newConfirmPassword The new confirm password value.
+     */
     fun updateConfirmPassword(newConfirmPassword: String) {
         confirmPassword.value = newConfirmPassword
         checkFormValidity()
     }
 
+    /**
+     * Updates the first name value.
+     *
+     * @param newFirstName The new first name value.
+     */
     fun updateFirstName(newFirstName: String) {
         firstName.value = newFirstName
         checkFormValidity()
     }
 
+    /**
+     * Updates the last name value.
+     *
+     * @param newLastName The new last name value.
+     */
     fun updateLastName(newLastName: String) {
         lastName.value = newLastName
         checkFormValidity()
     }
 
+    /**
+     * Checks if the email is valid.
+     *
+     * @return True if the email is valid, false otherwise.
+     */
     fun isEmailValid(): Boolean {
         return validator.isValidEmail(email.value ?: "")
     }
 
+    /**
+     * Checks if the password is valid.
+     *
+     * @return True if the password is valid, false otherwise.
+     */
     fun isPasswordValid(): Boolean {
         return validator.isValidPassword(password.value ?: "")
     }
 
+    /**
+     * Checks if the first name is valid.
+     *
+     * @return True if the first name is valid, false otherwise.
+     */
     fun isFirstNameValid(): Boolean {
         return validator.isNotBlank(firstName.value ?: "")
     }
 
+    /**
+     * Checks if the last name is valid.
+     *
+     * @return True if the last name is valid, false otherwise.
+     */
     fun isLastNameValid(): Boolean {
         return validator.isNotBlank(lastName.value ?: "")
     }
 
+    /**
+     * Checks if the confirm password is valid.
+     *
+     * @return True if the confirm password is valid, false otherwise.
+     */
     fun isConfirmPasswordValid(): Boolean {
         return validator.isValidConfirmPassword(password.value ?: "", confirmPassword.value ?: "")
     }
 
+    /**
+     * Checks the form validity.
+     */
     private fun checkFormValidity() {
         isAllFieldsValid.value = isFirstNameValid() &&
                 isLastNameValid() &&
@@ -80,6 +148,9 @@ class RegisterViewModel(private val tokenManager: TokenManager,
                 isConfirmPasswordValid()
     }
 
+    /**
+     * Registers the user.
+     */
     fun register(){
         viewModelScope.launch {
             authenticationState.value = AuthenticationState.LOADING
@@ -97,5 +168,4 @@ class RegisterViewModel(private val tokenManager: TokenManager,
             }
         }
     }
-
 }
