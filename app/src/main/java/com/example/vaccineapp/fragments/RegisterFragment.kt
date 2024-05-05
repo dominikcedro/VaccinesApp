@@ -1,11 +1,13 @@
 package com.example.vaccineapp.fragments
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.annotation.RequiresApi
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -15,7 +17,20 @@ import com.example.vaccineapp.databinding.FragmentRegisterBinding
 import com.example.vaccineapp.utils.hideKeyboard
 import com.example.vaccineapp.utils.showSnackBar
 import com.example.vaccineapp.viewmodel.RegisterViewModel
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.OffsetDateTime
+import java.time.Period
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 /**
  * Fragment for registering a new user.
@@ -33,6 +48,7 @@ class RegisterFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -63,6 +79,10 @@ class RegisterFragment : Fragment() {
             if (!viewModel.isPasswordValid()) {
                 //TODO
             }
+        }
+
+        binding.etDOB.setOnClickListener {
+            getSelectedDate()
         }
 
 
@@ -106,9 +126,33 @@ class RegisterFragment : Fragment() {
         }
 
     }
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getSelectedDate(){
+        val datePickerBuilder = MaterialDatePicker.Builder.datePicker()
+        val constraintsBuilder = CalendarConstraints.Builder()
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        val today = LocalDate.now(ZoneId.systemDefault())
+        val startDate = today.minusYears(100)
+        val endDate = today.minusYears(18)
+
+        val startMillis = startDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+        val endMillis = endDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+
+        constraintsBuilder.setStart(startMillis)
+        constraintsBuilder.setEnd(endMillis)
+        constraintsBuilder.setOpenAt(endMillis)
+
+        val constraints = constraintsBuilder.build()
+        datePickerBuilder.setCalendarConstraints(constraints)
+
+        val datePicker = datePickerBuilder.build()
+
+        datePicker.addOnPositiveButtonClickListener { selectedDate ->
+            val date = Instant.ofEpochMilli(selectedDate).atZone(ZoneId.systemDefault()).toLocalDate()
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            binding.etDOB.setText(date.format(formatter))
+            viewModel.setDoB(date.format(formatter))
+        }
+        datePicker.show(childFragmentManager, "date_picker")
     }
-}
+    }

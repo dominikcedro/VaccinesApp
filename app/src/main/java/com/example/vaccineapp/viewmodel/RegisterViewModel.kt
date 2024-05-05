@@ -93,6 +93,16 @@ class RegisterViewModel(private val tokenManager: TokenManager,
     }
 
     /**
+     * Sets the date of birth value.
+     *
+     * @param newDoB The new last DoB value.
+     */
+    fun setDoB(newDoB: String) {
+        DoB.value = newDoB
+        checkFormValidity()
+    }
+
+    /**
      * Checks if the email is valid.
      *
      * @return True if the email is valid, false otherwise.

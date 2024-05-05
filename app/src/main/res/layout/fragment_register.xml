@@ -144,8 +144,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Date-of-birth"
-                    android:inputType="date" />
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:hint="Date of birth" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
