@@ -1,3 +1,5 @@
+package com.example.vaccineapp.service
+
 import com.example.vaccineapp.auth.AuthenticationRequest
 import com.example.vaccineapp.auth.AuthenticationResponse
 import com.example.vaccineapp.auth.NotificationTokenRequest

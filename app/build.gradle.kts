@@ -3,6 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("plugin.serialization") version "1.9.21"
     id("com.google.gms.google-services")
+    id("org.jetbrains.dokka") version "1.9.20"
+
 }
 android {
     namespace = "com.example.vaccineapp"
@@ -75,5 +77,7 @@ dependencies {
 
     implementation("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+
+    dokkaPlugin("org.jetbrains.dokka:android-documentation-plugin:1.9.20")
 
 }

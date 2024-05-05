@@ -74,28 +74,6 @@ class AddScheduledVaccinationViewModel(private val httpService: HttpService) : V
     }
 
     /**
-     * Sets the chosen date.
-     *
-     * @param date The chosen date.
-     */
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun setChosenDate(date: LocalDate) {
-        val time = chosenZonedDateTime.value?.toLocalTime() ?: LocalTime.MIDNIGHT
-        chosenZonedDateTime.value = ZonedDateTime.of(LocalDateTime.of(date, time), chosenZonedDateTime.value?.zone ?: ZoneId.systemDefault())
-    }
-
-    /**
-     * Sets the chosen time.
-     *
-     * @param time The chosen time.
-     */
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun setChosenTime(time: LocalTime) {
-        val date = chosenZonedDateTime.value?.toLocalDate() ?: LocalDate.now()
-        chosenZonedDateTime.value = ZonedDateTime.of(LocalDateTime.of(date, time), chosenZonedDateTime.value?.zone ?: ZoneId.systemDefault())
-    }
-
-    /**
      * Adds a reminder.
      *
      * @param reminder The reminder to add.
