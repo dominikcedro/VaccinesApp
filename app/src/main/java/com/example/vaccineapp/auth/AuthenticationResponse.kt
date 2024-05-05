@@ -2,6 +2,9 @@ package com.example.vaccineapp.auth
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Data class for authentication response.
+ */
 @Serializable
 data class AuthenticationResponse(
         var token: String,

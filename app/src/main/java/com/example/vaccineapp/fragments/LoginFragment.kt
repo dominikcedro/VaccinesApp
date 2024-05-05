@@ -18,6 +18,9 @@ import com.example.vaccineapp.R
 import com.example.vaccineapp.activity.MainActivity
 import com.example.vaccineapp.viewmodel.LoginViewModel
 
+/**
+ * Fragment for logging in.
+ */
 class LoginFragment : Fragment() {
     private val viewModel: LoginViewModel by viewModel()
     private var _binding: FragmentLoginBinding? = null

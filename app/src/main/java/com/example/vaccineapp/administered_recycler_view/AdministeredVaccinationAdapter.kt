@@ -8,6 +8,9 @@ import com.example.vaccineapp.R
 import com.example.vaccineapp.domain.AdministeredVaccinationGetRequest
 import com.google.android.material.button.MaterialButton
 
+/**
+ * Adapter for the recycler view in the AdministeredVaccinationsFragment.
+ */
 class AdministeredVaccinationAdapter(private val myDataset: Array<AdministeredVaccinationGetRequest>, private val onFloatingButtonClicked: () -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

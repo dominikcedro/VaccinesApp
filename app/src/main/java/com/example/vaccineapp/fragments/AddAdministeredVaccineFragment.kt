@@ -30,6 +30,9 @@ import java.time.LocalDate
 import java.time.ZoneId
 import kotlin.math.log
 
+/**
+ * Fragment for adding administered vaccines.
+ */
 class AddAdministeredVaccineFragment : Fragment() {
     private val viewModel: AddAdministeredVaccinationViewModel by viewModel()
     private var _binding: FragmentAddAdministeredVaccineBinding? = null
@@ -122,6 +125,9 @@ class AddAdministeredVaccineFragment : Fragment() {
 
     }
 
+    /**
+     * Initializes the dropdown menu.
+     */
     private suspend fun initDropdownMenu() {
         viewModel.fetchVaccines()
         val vaccineNames = viewModel.getVaccineNames()

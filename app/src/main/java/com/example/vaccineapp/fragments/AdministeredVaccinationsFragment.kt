@@ -15,6 +15,9 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.navigation.fragment.findNavController
 
+/**
+ * Fragment for displaying administered vaccinations.
+ */
 class AdministeredVaccinationsFragment : Fragment() {
     private val viewModel: AdministeredVaccinationViewModel by viewModel()
     private var _binding: FragmentAdministeredVaccinationsBinding? = null

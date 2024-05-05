@@ -13,6 +13,9 @@ import androidx.navigation.ui.NavigationUI
 import com.example.vaccineapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+/**
+ * Main activity for the app.
+ */
 class MainActivity : AppCompatActivity() {
 
     private val requestPermissionLauncher = registerForActivityResult(

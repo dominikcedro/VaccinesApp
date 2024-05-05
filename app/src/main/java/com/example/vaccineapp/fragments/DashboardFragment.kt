@@ -29,6 +29,9 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 
+/**
+ * Fragment for the dashboard.
+ */
 class DashboardFragment : Fragment() {
 
 
@@ -109,6 +112,9 @@ class DashboardFragment : Fragment() {
         fun newInstance() = DashboardFragment()
     }
 
+    /**
+     * Displays a dialog to confirm or decline a scheduled vaccination.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun confirmVaccinationDialog(scheduledVaccination: ScheduledVaccinationGetRequest) {
         val builder = AlertDialog.Builder(context)

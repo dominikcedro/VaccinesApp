@@ -35,9 +35,9 @@ import io.ktor.serialization.kotlinx.json.json
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 
-
-
-
+/**
+ * Module for http client.
+ */
 val httpClientModule = module {
     single(named("defaultHttpClient")) {
         HttpClient(Android) {
@@ -93,6 +93,9 @@ val httpClientModule = module {
     }
 }
 
+/**
+ * Module for services.
+ */
 val serviceModule = module {
     single { TokenManager(get(named("noAuthHttpClient")), get())}
     single { Validator() }
@@ -103,6 +106,9 @@ val serviceModule = module {
     single { MyFirebaseMessagingService() }
 }
 
+/**
+ * Module for view models.
+ */
 val viewModelModule = module {
     single { LoginViewModel(get(), get()) }
     single { RegisterViewModel(get(), get(), get()) }

@@ -17,6 +17,9 @@ import com.example.vaccineapp.utils.showSnackBar
 import com.example.vaccineapp.viewmodel.RegisterViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * Fragment for registering a new user.
+ */
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!

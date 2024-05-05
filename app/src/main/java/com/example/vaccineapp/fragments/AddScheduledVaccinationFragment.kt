@@ -1,10 +1,7 @@
 package com.example.vaccineapp.fragments
 
-
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,12 +9,12 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.vaccineapp.R
 import com.example.vaccineapp.databinding.FragmentAddScheduledVaccinationBinding
 import com.example.vaccineapp.domain.Reminder
-import com.example.vaccineapp.domain.ReminderPostRequest
 import com.example.vaccineapp.utils.showSnackBar
 import com.example.vaccineapp.viewmodel.AddScheduledVaccinationViewModel
 import com.google.android.material.datepicker.CalendarConstraints
@@ -33,12 +30,14 @@ import java.time.LocalTime
 import java.time.OffsetDateTime
 import java.time.Period
 import java.time.ZoneId
-import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
+import java.time.ZonedDateTime
 
+/**
+ * Fragment for adding scheduled vaccinations.
+ */
 class AddScheduledVaccinationFragment : Fragment() {
     private val viewModel: AddScheduledVaccinationViewModel by viewModel()
-
     private var _binding: FragmentAddScheduledVaccinationBinding? = null
     private val binding get() = _binding!!
 
@@ -55,11 +54,6 @@ class AddScheduledVaccinationFragment : Fragment() {
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,7 +64,6 @@ class AddScheduledVaccinationFragment : Fragment() {
             viewModel.fetchRecommendedVaccines()
             initDropdownMenu()
             viewModel.fetchScheduledVaccinations()
-
         }
 
         binding.chooseVaccineTextView.setOnItemClickListener { _, _, position, _ ->
@@ -89,7 +82,6 @@ class AddScheduledVaccinationFragment : Fragment() {
             binding.btnSubmit.isEnabled = viewModel.areAllFieldsValid()
         }
 
-
         binding.pickDate.setOnClickListener {
             getSelectedDateTime()
         }
@@ -106,7 +98,6 @@ class AddScheduledVaccinationFragment : Fragment() {
             val reminder = Reminder()
             setDateTimeForReminder(reminder)
         }
-
 
         binding.btnSubmit.setOnClickListener {
             if (!viewModel.isVaccinationNonExisting()){
@@ -129,6 +120,10 @@ class AddScheduledVaccinationFragment : Fragment() {
             }
         }
     }
+
+    /**
+     * Get the selected date and time.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getSelectedDateTime(){
         val datePickerBuilder = MaterialDatePicker.Builder.datePicker()
@@ -181,6 +176,10 @@ class AddScheduledVaccinationFragment : Fragment() {
         }
         datePicker.show(childFragmentManager, "date_picker")
     }
+
+    /**
+     * Set the date and time for the reminder.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setDateTimeForReminder(reminder: Reminder) {
         val datePicker = MaterialDatePicker.Builder.datePicker().build()
@@ -208,6 +207,9 @@ class AddScheduledVaccinationFragment : Fragment() {
         datePicker.show(childFragmentManager, "date_picker")
     }
 
+    /**
+     * Inflate the reminder.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun inflateReminder(reminder: Reminder) {
         val newReminder = LayoutInflater.from(requireContext()).inflate(R.layout.item_reminder, binding.reminderLayout, false)
@@ -215,6 +217,9 @@ class AddScheduledVaccinationFragment : Fragment() {
         initReminder(newReminder, reminder)
     }
 
+    /**
+     * Initialize the reminder.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initReminder(reminderView: View, reminder: Reminder) {
         val deleteButton = reminderView.findViewById<Button>(R.id.btnDelete)
@@ -226,14 +231,19 @@ class AddScheduledVaccinationFragment : Fragment() {
         reminderDate.text = reminder.dateTime?.format(formatter)
     }
 
+    /**
+     * Remove the reminder.
+     */
     private fun removeReminder(reminderView: View, reminder: Reminder) {
         binding.reminderLayout.removeView(reminderView)
         viewModel.removeReminder(reminder)
     }
 
+    /**
+     * Initialize the dropdown menu.
+     */
     private fun initDropdownMenu() {
         val adapter = ArrayAdapter(requireContext(), R.layout.vaccine_menu_item, viewModel.getVaccineNames())
         binding.chooseVaccineTextView.setAdapter(adapter)
     }
-
 }

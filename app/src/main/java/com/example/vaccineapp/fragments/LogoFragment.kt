@@ -13,9 +13,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 /**
- * A simple [Fragment] subclass.
- * Use the [LogoFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Fragment for displaying the logo of the app.
  */
 class LogoFragment : Fragment() {
     // TODO: Rename and change types of parameters

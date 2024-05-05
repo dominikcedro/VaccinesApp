@@ -7,6 +7,9 @@ import android.os.Looper
 import androidx.navigation.findNavController
 import com.example.vaccineapp.R
 
+/**
+ * Activity for the app's start screen.
+ */
 class StartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

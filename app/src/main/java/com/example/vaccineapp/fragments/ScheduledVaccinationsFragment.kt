@@ -18,7 +18,9 @@ import com.example.vaccineapp.databinding.FragmentScheduledVaccinationsBinding
 import com.example.vaccineapp.viewmodel.ScheduledVaccinationViewModel
 import com.example.vaccineapp.scheduled_recycler_view.ScheduledVaccinationAdapter
 
-
+/**
+ * Fragment for displaying scheduled vaccinations.
+ */
 class ScheduledVaccinationsFragment : Fragment() {
     private val viewModel: ScheduledVaccinationViewModel by viewModel()
     private var _binding: FragmentScheduledVaccinationsBinding? = null

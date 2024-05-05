@@ -8,6 +8,9 @@ import com.example.vaccineapp.R
 import com.example.vaccineapp.domain.ScheduledVaccinationGetRequest
 import com.google.android.material.button.MaterialButton
 
+/**
+ * Adapter for the recycler view in the ScheduledVaccinationsFragment.
+ */
 class ScheduledVaccinationAdapter(private val myDataset: Array<ScheduledVaccinationGetRequest>, private val onFloatingButtonClicked: () -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

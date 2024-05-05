@@ -8,6 +8,11 @@ import androidx.fragment.app.Fragment
 import com.example.vaccineapp.R
 import com.google.android.material.snackbar.Snackbar
 
+/**
+ * Shows a snackbar with a message.
+ * @param message The message to be displayed.
+ * @param error If true, the snackbar will have an error color.
+ */
 fun Fragment.showSnackBar(message: String, error: Boolean) {
     val snackbar = Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT)
     snackbar.setTextColor(
@@ -34,6 +39,10 @@ fun Fragment.showSnackBar(message: String, error: Boolean) {
     snackbar.show()
 }
 
+/**
+ * Hides the keyboard.
+ * @param view The view that has the keyboard.
+ */
 fun Fragment.hideKeyboard(view: View) {
     val inputMethodManager = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
