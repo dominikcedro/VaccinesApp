@@ -17,9 +17,21 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 
+/**
+ * Service for handling HTTP requests.
+ *
+ * @property noAuthHttpClient The HTTP client for making requests without authentication.
+ * @property defaultHttpClient The HTTP client for making requests with authentication.
+ */
 class HttpService(private val noAuthHttpClient: HttpClient, private val defaultHttpClient: HttpClient) {
     private val usersServiceUrl = "http://ec2-13-49-243-234.eu-north-1.compute.amazonaws.com"
 
+    /**
+     * Authenticates the user.
+     *
+     * @param authenticationRequest The authentication request.
+     * @return The authentication response.
+     */
     suspend fun authenticate(authenticationRequest: AuthenticationRequest): AuthenticationResponse {
         val url = "$usersServiceUrl/auth/login"
 
@@ -31,6 +43,12 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
         return response.body<AuthenticationResponse>()
     }
 
+    /**
+     * Registers the user.
+     *
+     * @param registrationRequest The registration request.
+     * @return The authentication response.
+     */
     suspend fun register(registrationRequest: RegistrationRequest): AuthenticationResponse {
         val url = "$usersServiceUrl/auth/register"
 
@@ -42,6 +60,12 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
         return response.body<AuthenticationResponse>()
     }
 
+    /**
+     * Logs out the user.
+     *
+     * @param logoutRequest The logout request.
+     * @return The HTTP response.
+     */
     suspend fun logout(logoutRequest: LogoutRequest): HttpResponse {
         val url = "$usersServiceUrl/auth/logout"
         val response = noAuthHttpClient.post(url) {
@@ -51,6 +75,11 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
         return response
     }
 
+    /**
+     * Updates the notification token.
+     *
+     * @param token The notification token.
+     */
     suspend fun updateNotificationToken(token: String) {
         val url = "$usersServiceUrl/user/notification-token"
         val response = defaultHttpClient.post(url) {
@@ -59,18 +88,33 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
         }
     }
 
+    /**
+     * Fetches the list of vaccines.
+     *
+     * @return The list of vaccines.
+     */
     suspend fun fetchVaccines(): List<Vaccine> {
         val url = "$usersServiceUrl/vaccine"
         val response = defaultHttpClient.get(url)
         return response.body<List<Vaccine>>()
     }
 
+    /**
+     * Fetches the list of recommended vaccines.
+     *
+     * @return The list of recommended vaccines.
+     */
     suspend fun fetchRecommendedVaccines(): List<Vaccine> {
         val url = "$usersServiceUrl/vaccine/recommended"
         val response = defaultHttpClient.get(url)
         return response.body<List<Vaccine>>()
     }
 
+    /**
+     * Adds an administered vaccine.
+     *
+     * @param administeredVaccinePostRequest The administered vaccine post request.
+     */
     suspend fun addAdministeredVaccine(administeredVaccinePostRequest: AdministeredVaccinePostRequest) {
         val url = "$usersServiceUrl/vaccination/administered"
         defaultHttpClient.post(url) {
@@ -79,18 +123,33 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
         }
     }
 
+    /**
+     * Fetches the list of administered vaccines.
+     *
+     * @return The list of administered vaccines.
+     */
     suspend fun fetchAdministeredVaccines(): List<AdministeredVaccinationGetRequest> {
         val url = "$usersServiceUrl/vaccination/administered/user"
         val response = defaultHttpClient.get(url)
         return response.body<List<AdministeredVaccinationGetRequest>>()
     }
 
+    /**
+     * Fetches the list of scheduled vaccines.
+     *
+     * @return The list of scheduled vaccines.
+     */
     suspend fun fetchScheduledVaccines(): List<ScheduledVaccinationGetRequest> {
         val url = "$usersServiceUrl/vaccination/scheduled/user"
         val response = defaultHttpClient.get(url)
         return response.body<List<ScheduledVaccinationGetRequest>>()
     }
 
+    /**
+     * Posts a scheduled vaccination.
+     *
+     * @param scheduledVaccinationPostRequest The scheduled vaccination post request.
+     */
     suspend fun postScheduledVaccination(scheduledVaccinationPostRequest: ScheduledVaccinationPostRequest) {
         val url = "$usersServiceUrl/vaccination/scheduled"
         defaultHttpClient.post(url) {
@@ -99,27 +158,46 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
         }
     }
 
+    /**
+     * Gets the list of vaccinations to confirm.
+     *
+     * @return The list of vaccinations to confirm.
+     */
     suspend fun getVaccinationsToConfirm(): List<ScheduledVaccinationGetRequest> {
         val url = "$usersServiceUrl/vaccination/scheduled/confirmation"
         val response = defaultHttpClient.get(url)
         return response.body<List<ScheduledVaccinationGetRequest>>()
     }
 
+    /**
+     * Confirms a vaccination.
+     *
+     * @param scheduledVaccinationId The ID of the scheduled vaccination.
+     */
     suspend fun confirmVaccination(scheduledVaccinationId: Long) {
         val url = "$usersServiceUrl/vaccination/scheduled/confirmation/$scheduledVaccinationId"
         defaultHttpClient.patch(url)
     }
 
+    /**
+     * Deletes a scheduled vaccination.
+     *
+     * @param scheduledVaccinationId The ID of the scheduled vaccination.
+     */
     suspend fun deleteScheduledVaccination(scheduledVaccinationId: Long) {
         val url = "$usersServiceUrl/vaccination/schedule/$scheduledVaccinationId"
         defaultHttpClient.delete(url)
     }
 
+    /**
+     * Fetches a news article.
+     *
+     * @return The news article.
+     */
     suspend fun fetchNewsArticle(): NewsArticle {
         val url = "https://newsapi.org/v2/everything?q=vaccines&apiKey=e888e885c27e4d5dbaa85c123c175c0e&pageSize=1"
         val response: HttpResponse = noAuthHttpClient.get(url)
         val newsResponse = response.body<NewsResponse>()
         return newsResponse.articles[0]
     }
-
 }

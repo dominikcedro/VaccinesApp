@@ -3,28 +3,44 @@ package com.example.vaccineapp.service
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.vaccineapp.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
+/**
+ * Service for handling Firebase messaging.
+ */
 class MyFirebaseMessagingService: FirebaseMessagingService() {
+
+    /**
+     * Called when a new token is generated.
+     *
+     * @param token The new token.
+     */
     override fun onNewToken(token: String) {
         super.onNewToken(token)
     }
 
+    /**
+     * Called when a message is received.
+     *
+     * @param remoteMessage The received message.
+     */
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
-
 
         if (remoteMessage.notification != null) {
             showNotification(remoteMessage.notification)
         }
     }
 
+    /**
+     * Shows a notification.
+     *
+     * @param notification The notification to show.
+     */
     private fun showNotification(notification: RemoteMessage.Notification?) {
         val channelId = "channel_id"
         val channelName = "channel_name"
