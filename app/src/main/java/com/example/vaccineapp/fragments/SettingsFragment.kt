@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -32,6 +33,24 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val tvFirstName: TextView = view.findViewById(R.id.tvFirstName)
+        val tvLastName: TextView = view.findViewById(R.id.tvLastName)
+        val tvEmail: TextView = view.findViewById(R.id.tvEmail)
+        val tvDoB: TextView = view.findViewById(R.id.tvDOB)
+        val tvRole: TextView = view.findViewById(R.id.tvRole)
+
+        viewModel.getUserDetails()
+
+        // Get the user details from the view model
+        viewModel.userDetails.observe(viewLifecycleOwner) { userDetails ->
+            tvFirstName.text = "Name: ${userDetails.firstName}"
+            tvLastName.text = "Last Name: ${userDetails.lastName}"
+            tvEmail.text = "Email: ${userDetails.email}"
+            tvDoB.text = "Date of Birth: ${userDetails.dateOfBirth}"
+            tvRole.text = "Role: ${userDetails.role}"
+        }
+
 
 
         val logoutButton: Button = view.findViewById(R.id.btnLogout)

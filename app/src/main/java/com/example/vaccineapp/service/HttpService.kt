@@ -10,6 +10,7 @@ import com.example.vaccineapp.domain.NewsArticle
 import com.example.vaccineapp.domain.NewsResponse
 import com.example.vaccineapp.domain.ScheduledVaccinationGetRequest
 import com.example.vaccineapp.domain.ScheduledVaccinationPostRequest
+import com.example.vaccineapp.domain.UserDetails
 import com.example.vaccineapp.domain.Vaccine
 
 import io.ktor.client.*
@@ -196,9 +197,26 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
      * @return The news article.
      */
     suspend fun fetchNewsArticle(): NewsArticle {
-        val url = "https://newsapi.org/v2/everything?q=vaccines&apiKey=e888e885c27e4d5dbaa85c123c175c0e&pageSize=10"
+        val url =
+            "https://newsapi.org/v2/everything?q=vaccines&apiKey=e888e885c27e4d5dbaa85c123c175c0e&pageSize=10"
         val response: HttpResponse = noAuthHttpClient.get(url)
         val newsResponse = response.body<NewsResponse>()
         return newsResponse.articles.random()
+    }
+
+    /**
+     * Fetches the user details.
+     *
+     * @param jwtToken The JWT token.
+     * @return The user details.
+     */
+    suspend fun getUserDetails(jwtToken: String): UserDetails {
+        val url = "$usersServiceUrl/user/details"
+        val response = defaultHttpClient.get(url) {
+            headers {
+                append("Authorization", "Bearer $jwtToken")
+            }
+        }
+        return response.body<UserDetails>()
     }
 }

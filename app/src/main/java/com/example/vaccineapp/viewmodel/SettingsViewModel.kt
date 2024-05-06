@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vaccineapp.auth.LogoutRequest
 import HttpService
+import com.example.vaccineapp.domain.UserDetails
 import com.example.vaccineapp.service.TokenManager
 import kotlinx.coroutines.launch
 
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
  */
 class SettingsViewModel(private val tokenManager: TokenManager, private val httpService: HttpService) : ViewModel() {
     val logoutStatus = MutableLiveData<Boolean>()
+    val userDetails = MutableLiveData<UserDetails>()
 
     /**
      * Logs out the user.
@@ -29,6 +31,18 @@ class SettingsViewModel(private val tokenManager: TokenManager, private val http
                 logoutStatus.postValue(true)
             } catch (e: Exception) {
                 logoutStatus.postValue(false)
+            }
+        }
+    }
+
+    fun getUserDetails() {
+        viewModelScope.launch {
+            try {
+                val userDetails = httpService.getUserDetails(tokenManager.getJwtToken() ?: "")
+                // Post the user details to the LiveData
+                this@SettingsViewModel.userDetails.postValue(userDetails)
+            } catch (e: Exception) {
+                // Handle the error
             }
         }
     }
