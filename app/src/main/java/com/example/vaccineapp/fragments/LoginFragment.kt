@@ -18,12 +18,14 @@ import com.example.vaccineapp.R
 import com.example.vaccineapp.activity.AdminActivity
 import com.example.vaccineapp.activity.MainActivity
 import com.example.vaccineapp.viewmodel.LoginViewModel
+import com.example.vaccineapp.viewmodel.SettingsViewModel
 
 /**
  * Fragment for logging in.
  */
 class LoginFragment : Fragment() {
     private val viewModel: LoginViewModel by viewModel()
+    private val settingsViewModel: SettingsViewModel by viewModel()
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
@@ -40,9 +42,18 @@ class LoginFragment : Fragment() {
 
 
         if (viewModel.isUserLoggedIn()) {
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
+            settingsViewModel.getUserDetails()
+            settingsViewModel.userDetails.observe(viewLifecycleOwner) { userDetails ->
+                if (userDetails.role == "USER") {
+                    val intent = Intent(requireContext(), AdminActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                } else {
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                }
+            }
         }
 
         binding.tvGoRegister.setOnClickListener {
@@ -71,9 +82,18 @@ class LoginFragment : Fragment() {
                 LoginViewModel.AuthenticationState.AUTHENTICATED -> {
                     binding.btnLogin.isEnabled = true
                     viewModel.updateNotificationToken()
-                    val intent = Intent(requireContext(), MainActivity::class.java)
-                    startActivity(intent)
-                    activity?.finish()
+                    settingsViewModel.getUserDetails()
+                    settingsViewModel.userDetails.observe(viewLifecycleOwner) { userDetails ->
+                        if (userDetails.role == "USER") {
+                            val intent = Intent(requireContext(), AdminActivity::class.java)
+                            startActivity(intent)
+                            activity?.finish()
+                        } else {
+                            val intent = Intent(requireContext(), MainActivity::class.java)
+                            startActivity(intent)
+                            activity?.finish()
+                        }
+                    }
                 }
 
                 LoginViewModel.AuthenticationState.FAILED -> {

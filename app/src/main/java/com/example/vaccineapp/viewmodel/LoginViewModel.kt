@@ -23,6 +23,7 @@ class LoginViewModel(private val tokenManager: TokenManager, private val httpSer
     private val password = MutableLiveData<String>("")
     val exceptionMessage = MutableLiveData<String>()
 
+
     /**
      * Represents the authentication state.
      */
@@ -68,6 +69,7 @@ class LoginViewModel(private val tokenManager: TokenManager, private val httpSer
                 exceptionMessage.postValue(e.message)
                 authenticationState.value = AuthenticationState.FAILED
             }
+
         }
     }
 
