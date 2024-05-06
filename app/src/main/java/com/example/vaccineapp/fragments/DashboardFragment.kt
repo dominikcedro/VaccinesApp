@@ -22,6 +22,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.vaccineapp.R
 import com.example.vaccineapp.domain.ScheduledVaccinationGetRequest
+import com.example.vaccineapp.viewmodel.LoginViewModel
 import com.example.vaccineapp.viewmodel.MainMenuViewModel
 import com.example.vaccineapp.viewmodel.ScheduledVaccinationViewModel
 import kotlinx.coroutines.launch
@@ -40,6 +41,8 @@ class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainMenuViewModel by viewModel()
+    val loginViewModel: LoginViewModel by viewModel()
+
 
     private val scheduledVaccinationViewModel: ScheduledVaccinationViewModel by sharedViewModel()
     private var closestVaccine: ScheduledVaccinationGetRequest? = null
@@ -78,7 +81,7 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
-            newsArticleViewModel.fetchArticle()
+                newsArticleViewModel.fetchArticle()
                 newsArticleViewModel.article.observe(viewLifecycleOwner) { newsArticle ->
                     _binding?.newsArticleTitleTextView?.text = newsArticle.title
                     val imageView = _binding?.newsArticleImageView
@@ -97,20 +100,23 @@ class DashboardFragment : Fragment() {
                         startActivity(intent)
                     }
                 }
-            viewModel.fetchVaccinationsToConfirm()
-            val vaccinationsToConfirm = viewModel.getVaccinationsToConfirm()
-            for (vaccination in vaccinationsToConfirm) {
-                confirmVaccinationDialog(vaccination)
-            }
 
-            scheduledVaccinationViewModel.getScheduledVaccinations()
-            closestVaccine = scheduledVaccinationViewModel.scheduledVaccinations.minByOrNull { it.dateTime }
-            if (closestVaccine != null) {
-                _binding?.closestVaccineName?.text = closestVaccine?.vaccine?.name
-            }
-            _binding?.closestVaccineCard?.setOnClickListener {
-                findNavController().navigate(R.id.action_mainMenuFragment_to_ScheduledVaccinationsFragment)
-            }
+                viewModel.fetchVaccinationsToConfirm()
+                val vaccinationsToConfirm = viewModel.getVaccinationsToConfirm()
+                for (vaccination in vaccinationsToConfirm) {
+                    confirmVaccinationDialog(vaccination)
+                }
+
+                scheduledVaccinationViewModel.getScheduledVaccinations()
+                closestVaccine =
+                    scheduledVaccinationViewModel.scheduledVaccinations.minByOrNull { it.dateTime }
+                if (closestVaccine != null) {
+                    _binding?.closestVaccineName?.text = closestVaccine?.vaccine?.name
+                }
+                _binding?.closestVaccineCard?.setOnClickListener {
+                    findNavController().navigate(R.id.action_mainMenuFragment_to_ScheduledVaccinationsFragment)
+                }
+
         }
     }
 

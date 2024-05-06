@@ -16,6 +16,7 @@ import com.example.vaccineapp.viewmodel.AddScheduledVaccinationViewModel
 import com.example.vaccineapp.viewmodel.AdministeredVaccinationViewModel
 import com.example.vaccineapp.viewmodel.MainMenuViewModel
 import com.example.vaccineapp.viewmodel.ScheduledVaccinationViewModel
+import com.example.vaccineapp.viewmodel.SettingsViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.android.Android
@@ -118,5 +119,6 @@ val viewModelModule = module {
     single { ScheduledVaccinationViewModel(get()) }
     single { MainMenuViewModel(get()) }
     single { NewsArticleViewModel(get()) }
+    factory { SettingsViewModel(get(), get()) }
 
 }
