@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_previous_vaccines"/>
     <item
         android:id="@+id/adminDashboard"
-        android:title="Dashboard"
+        android:title="Admin Dashboard"
         android:icon="@drawable/ic_calendar"/>
     <item
         android:id="@+id/usersVaccines"

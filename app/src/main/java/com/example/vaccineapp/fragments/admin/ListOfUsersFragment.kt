@@ -14,20 +14,21 @@ import com.example.vaccineapp.viewmodel.AdministeredVaccinationViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.navigation.fragment.findNavController
+import com.example.vaccineapp.databinding.FragmentListOfUsersBinding
 
 /**
  * Fragment for displaying all users.
  */
 class ListOfUsersFragment : Fragment() {
     private val viewModel: AdministeredVaccinationViewModel by viewModel()
-    private var _binding: FragmentAdministeredVaccinationsBinding? = null
+    private var _binding: FragmentListOfUsersBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAdministeredVaccinationsBinding.inflate(inflater, container, false)
+        _binding = FragmentListOfUsersBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -35,15 +36,8 @@ class ListOfUsersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
 
-            viewModel.getAdministeredVaccinations()
-            val adapter = AdministeredVaccinationAdapter(viewModel.administeredVaccinations.toTypedArray()){
-                // Navigate to the other fragment
-                findNavController().navigate(R.id.action_administeredVaccinationsFragment_to_addAdministeredVaccineFragment)
-            }
-            binding.administeredVaccinationsRV.adapter = adapter
         }
-        val layoutManager = LinearLayoutManager(context)
-        binding.administeredVaccinationsRV.layoutManager = layoutManager
+        
     }
 
 }

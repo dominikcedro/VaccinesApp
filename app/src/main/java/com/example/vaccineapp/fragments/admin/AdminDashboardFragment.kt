@@ -13,6 +13,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.example.vaccineapp.R
+import com.example.vaccineapp.databinding.FragmentAdminDashboardBinding
 import com.example.vaccineapp.viewmodel.LoginViewModel
 import com.example.vaccineapp.viewmodel.MainMenuViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -24,7 +25,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class AdminDashboardFragment : Fragment() {
 
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentAdminDashboardBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainMenuViewModel by viewModel()
     val loginViewModel: LoginViewModel by viewModel()
@@ -34,7 +35,7 @@ class AdminDashboardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentAdminDashboardBinding.inflate(inflater, container, false)
 
         val clock: TextClock = binding.clock
         clock.format24Hour = "HH:mm"
