@@ -58,18 +58,23 @@ class LoginViewModel(private val tokenManager: TokenManager, private val httpSer
      * Authenticates the user.
      */
     fun authenticate() {
+        Log.d("LoginDebug", "authenticate() called")
         viewModelScope.launch {
             authenticationState.value = AuthenticationState.LOADING
             try {
                 val authenticationRequest = AuthenticationRequest(email.value ?: "", password.value ?: "")
+                Log.d("LoginDebug", "email: ${email.value}, password: ${password.value}")
+                Log.d("LoginDebug", "Before httpService.authenticate()")
                 val tokensDTO = httpService.authenticate(authenticationRequest)
+                Log.d("LoginDebug", "After httpService.authenticate(), tokensDTO: $tokensDTO")
                 tokenManager.saveTokens(tokensDTO.token, tokensDTO.refreshToken, tokensDTO.expirationDate)
                 authenticationState.value = AuthenticationState.AUTHENTICATED
+                Log.d("LoginDebug", "authenticationState updated to: $authenticationState.value")
             } catch (e: Exception) {
                 exceptionMessage.postValue(e.message)
                 authenticationState.value = AuthenticationState.FAILED
+                Log.d("LoginDebug", "authenticationState updated to: $authenticationState.value")
             }
-
         }
     }
 

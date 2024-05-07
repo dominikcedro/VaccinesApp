@@ -44,7 +44,7 @@ class LoginFragment : Fragment() {
         if (viewModel.isUserLoggedIn()) {
             settingsViewModel.getUserDetails()
             settingsViewModel.userDetails.observe(viewLifecycleOwner) { userDetails ->
-                if (userDetails.role == "USER") {
+                if (userDetails.role == "ADMIN") {
                     val intent = Intent(requireContext(), AdminActivity::class.java)
                     startActivity(intent)
                     activity?.finish()
@@ -74,6 +74,7 @@ class LoginFragment : Fragment() {
         }
 
         viewModel.authenticationState.observe(viewLifecycleOwner) { authenticationState ->
+            Log.d("LoginFragment", "authenticationState observed: $authenticationState")
             when (authenticationState) {
                 LoginViewModel.AuthenticationState.LOADING -> {
                     binding.btnLogin.isEnabled = false
@@ -84,7 +85,7 @@ class LoginFragment : Fragment() {
                     viewModel.updateNotificationToken()
                     settingsViewModel.getUserDetails()
                     settingsViewModel.userDetails.observe(viewLifecycleOwner) { userDetails ->
-                        if (userDetails.role == "USER") {
+                        if (userDetails.role == "ADMIN") {
                             val intent = Intent(requireContext(), AdminActivity::class.java)
                             startActivity(intent)
                             activity?.finish()
