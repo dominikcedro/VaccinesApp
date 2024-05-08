@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vaccineapp.databinding.FragmentUsersVaccinesBinding
 import com.example.vaccineapp.users_vaccines_recycler_view.UsersScheduledVaccinationAdapter
@@ -34,7 +35,10 @@ class UsersVaccinesFragment : Fragment() {
         listViewModel.fetchUsers()
 
         listViewModel.usersList.observe(viewLifecycleOwner) { users ->
-            val adapter = ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line, users.map { it.email })
+            val adapter = ArrayAdapter(
+                requireContext(),
+                R.layout.simple_dropdown_item_1line,
+                users.map { it.email })
             binding.userDropdown.setAdapter(adapter)
 
             binding.userDropdown.setOnItemClickListener { _, _, position, _ ->
@@ -46,9 +50,11 @@ class UsersVaccinesFragment : Fragment() {
         vaccinesViewModel.scheduledVaccines.observe(viewLifecycleOwner) { vaccines ->
             val recyclerView = binding.scheduledVaccinesRecyclerView
             recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = UsersScheduledVaccinationAdapter(vaccines) { vaccine ->
-                // Handle edit button click
-                // You can use findNavController().navigate() to navigate to the edit fragment
+            recyclerView.adapter = UsersScheduledVaccinationAdapter(vaccines) { vaccineId ->
+                val bundle = Bundle().apply {
+                    putLong("vaccineId", vaccineId)
+                }
+                findNavController().navigate(com.example.vaccineapp.R.id.editUsersScheduledVaccineFragment, bundle)
             }
         }
     }

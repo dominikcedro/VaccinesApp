@@ -15,16 +15,31 @@
         android:name="com.example.vaccineapp.fragments.ListOfUsersFragment"
         android:label="List of Users"
         tools:layout="@layout/fragment_list_of_users" />
-    <fragment
-        android:id="@+id/listOfVaccinesFragment"
-        android:name="com.example.vaccineapp.fragments.UsersVaccinesFragment"
-        android:label="Users Vaccines Fragment"
-        tools:layout="@layout/fragment_users_vaccines" />
 
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.vaccineapp.fragments.SettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/listOfVaccinesFragment"
+        android:name="com.example.vaccineapp.fragments.UsersVaccinesFragment"
+        android:label="Users Vaccines Fragment"
+        tools:layout="@layout/fragment_users_vaccines" >
+        <action
+            android:id="@+id/action_usersVaccinesFragment_to_editUsersScheduledVaccineFragment"
+            app:destination="@id/editUsersScheduledVaccineFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editUsersScheduledVaccineFragment"
+        android:name="com.example.vaccineapp.fragments.EditUsersScheduledVaccineFragment"
+        android:label="EditScheduledVaccines"
+        tools:layout="@layout/fragment_edit_users_scheduled_vaccine" >
+        <argument
+            android:name="vaccineId"
+            app:argType="long" />
+    </fragment>
 
 </navigation>
