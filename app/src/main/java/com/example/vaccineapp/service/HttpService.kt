@@ -249,4 +249,12 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
         }
         return response.body<ScheduledVaccinationGetRequest>()
     }
+
+    suspend fun updateScheduledVaccination(scheduledVaccinationPostRequest: ScheduledVaccinationPostRequest, vaccineId: Long) {
+        val url = "$usersServiceUrl/vaccination/scheduled/$vaccineId"
+        defaultHttpClient.put(url) {
+            contentType(ContentType.Application.Json)
+            setBody(scheduledVaccinationPostRequest)
+        }
+    }
 }

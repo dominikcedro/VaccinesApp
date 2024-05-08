@@ -10,10 +10,6 @@ import com.example.vaccineapp.domain.ReminderPostRequest
 import com.example.vaccineapp.domain.ScheduledVaccinationGetRequest
 import com.example.vaccineapp.domain.ScheduledVaccinationPostRequest
 import com.example.vaccineapp.domain.Vaccine
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 

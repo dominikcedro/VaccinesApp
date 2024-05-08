@@ -10,5 +10,5 @@ data class ScheduledVaccinationPostRequest(
     val vaccineId: Long,
     val doseNumber: Int,
     val dateTime: String,
-    val reminders: List<ReminderPostRequest>
+    val reminders: MutableList<ReminderPostRequest>
 )
