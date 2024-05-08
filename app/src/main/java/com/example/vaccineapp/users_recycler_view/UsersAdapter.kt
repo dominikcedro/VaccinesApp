@@ -1,26 +1,34 @@
-package com.example.vaccineapp.users_recycler_view
-
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vaccineapp.R
-import com.example.vaccineapp.domain.UserRow
+import com.example.vaccineapp.domain.UserDetails
 
-class UsersAdapter(private val myDataset: Array<UserRow>) :
-    RecyclerView.Adapter<UsersViewHolder>() {
+class UsersAdapter(var users: List<UserDetails>) : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.user_display_item, parent, false)
-        return UsersViewHolder(view)
+    class UserViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+        val email: TextView = view.findViewById(R.id.email)
+        val firstName: TextView = view.findViewById(R.id.firstName)
+        val userId: TextView = view.findViewById(R.id.userId)
+        val role: TextView = view.findViewById(R.id.userRole)
+        // Add other views for the remaining user properties
     }
 
-    override fun onBindViewHolder(holder: UsersViewHolder, position: Int) {
-        val user = myDataset[position]
-        holder.firstName.text = user.firstName
-        holder.lastName.text = user.lastName
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.user_display_item, parent, false)
+        return UserViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+        val user = users[position]
         holder.email.text = user.email
+        holder.firstName.text = user.firstName
+        holder.role.text = user.role
+        holder.userId.text = user.id.toString()
+        // Set other views with the remaining user properties
     }
 
-    override fun getItemCount() = myDataset.size
+    override fun getItemCount() = users.size
 }

@@ -1,6 +1,7 @@
 package com.example.vaccineapp.utils
 
 import HttpService
+import ListOfUsersViewModel
 import NewsArticleViewModel
 
 import android.content.Context
@@ -105,6 +106,7 @@ val serviceModule = module {
         androidContext().getSharedPreferences("com.mwdziak.fitness_mobile_client", Context.MODE_PRIVATE)
     }
     single { MyFirebaseMessagingService() }
+
 }
 
 /**
@@ -120,5 +122,6 @@ val viewModelModule = module {
     single { MainMenuViewModel(get()) }
     single { NewsArticleViewModel(get()) }
     factory { SettingsViewModel(get(), get()) }
+    factory { ListOfUsersViewModel(get(), get()) }
 
 }

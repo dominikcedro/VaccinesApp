@@ -219,4 +219,14 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
         }
         return response.body<UserDetails>()
     }
+    // function to get all users from user/all
+    suspend fun getAllUsers(jwtToken: String): List<UserDetails> {
+        val url = "$usersServiceUrl/user/all"
+        val response = defaultHttpClient.get(url) {
+            headers {
+                append("Authorization", "Bearer $jwtToken")
+            }
+        }
+        return response.body<List<UserDetails>>()
+    }
 }

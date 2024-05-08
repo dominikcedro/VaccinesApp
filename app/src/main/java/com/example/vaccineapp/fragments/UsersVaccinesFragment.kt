@@ -1,4 +1,4 @@
-package com.example.vaccineapp.fragments.admin
+package com.example.vaccineapp.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,20 +15,21 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.navigation.fragment.findNavController
 import com.example.vaccineapp.databinding.FragmentListOfUsersBinding
+import com.example.vaccineapp.databinding.FragmentUsersVaccinesBinding
 
 /**
  * Fragment for displaying all users.
  */
-class ListOfUsersFragment : Fragment() {
+class UsersVaccinesFragment : Fragment() {
     private val viewModel: AdministeredVaccinationViewModel by viewModel()
-    private var _binding: FragmentListOfUsersBinding? = null
+    private var _binding: FragmentUsersVaccinesBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentListOfUsersBinding.inflate(inflater, container, false)
+        _binding = FragmentUsersVaccinesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -37,7 +38,7 @@ class ListOfUsersFragment : Fragment() {
         lifecycleScope.launch {
 
         }
-        
+
     }
 
 }

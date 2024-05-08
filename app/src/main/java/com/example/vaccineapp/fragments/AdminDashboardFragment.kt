@@ -1,4 +1,4 @@
-package com.example.vaccineapp.fragments.admin
+package com.example.vaccineapp.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
