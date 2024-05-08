@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/adminDashboardFragment"
-        android:name="com.example.vaccineapp.fragments.AdminDashboardFragment"
+        android:name="com.example.vaccineapp.fragments.admin.AdminDashboardFragment"
         android:label="Admin Dashboard"
         tools:layout="@layout/fragment_admin_dashboard" />
     <fragment
         android:id="@+id/listOfUsersFragment"
-        android:name="com.example.vaccineapp.fragments.ListOfUsersFragment"
+        android:name="com.example.vaccineapp.fragments.admin.ListOfUsersFragment"
         android:label="List of Users"
         tools:layout="@layout/fragment_list_of_users" />
 
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/listOfVaccinesFragment"
-        android:name="com.example.vaccineapp.fragments.UsersVaccinesFragment"
+        android:name="com.example.vaccineapp.fragments.admin.UsersVaccinesFragment"
         android:label="Users Vaccines Fragment"
         tools:layout="@layout/fragment_users_vaccines" >
         <action
@@ -34,7 +34,7 @@
 
     <fragment
         android:id="@+id/editUsersScheduledVaccineFragment"
-        android:name="com.example.vaccineapp.fragments.EditUsersScheduledVaccineFragment"
+        android:name="com.example.vaccineapp.fragments.admin.EditUsersScheduledVaccineFragment"
         android:label="EditScheduledVaccines"
         tools:layout="@layout/fragment_edit_users_scheduled_vaccine" >
         <argument

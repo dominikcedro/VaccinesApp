@@ -1,4 +1,4 @@
-package com.example.vaccineapp.fragments
+package com.example.vaccineapp.fragments.start
 
 
 import android.content.Intent

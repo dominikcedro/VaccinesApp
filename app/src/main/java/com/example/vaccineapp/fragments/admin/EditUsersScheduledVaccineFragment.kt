@@ -1,4 +1,4 @@
-package com.example.vaccineapp.fragments
+package com.example.vaccineapp.fragments.admin
 
 import android.os.Build
 import android.os.Bundle
@@ -8,15 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.vaccineapp.R
 import com.example.vaccineapp.databinding.FragmentEditUsersScheduledVaccineBinding
 import com.example.vaccineapp.domain.ScheduledVaccinationGetRequest
 import com.example.vaccineapp.utils.showSnackBar
 import com.example.vaccineapp.viewmodel.EditUserScheduledVaccineViewModel
-import com.example.vaccineapp.viewmodel.UserVaccinesViewModel
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker

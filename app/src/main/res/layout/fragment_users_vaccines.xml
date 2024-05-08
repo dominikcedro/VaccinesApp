@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background_light">
+    tools:context=".fragments.admin.UsersVaccinesFragment"
+    android:background="?attr/android:windowBackground">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -15,7 +16,7 @@
         android:width="200dp"
         android:height="60dp"
         android:background="@android:color/transparent"
-        android:text="Avaible vaccines"
+        android:text="Edit Scheduled"
         android:textAlignment="center"
         android:textSize="36sp"
         android:textStyle="bold"
@@ -42,6 +43,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/scheduled_vaccines_recycler_view"
+        android:background="@android:color/transparent"
         android:layout_width="315dp"
         android:layout_height="507dp"
         android:layout_marginStart="48dp"

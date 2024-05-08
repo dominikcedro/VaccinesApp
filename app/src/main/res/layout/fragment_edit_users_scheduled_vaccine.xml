@@ -4,47 +4,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_margin="8dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="@color/white">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/vaccineNameLayout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:hintEnabled="true"
-            app:hintAnimationEnabled="true">
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:gravity="center">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/vaccineName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Vaccine Name" />
+                android:text="Vaccine Name"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/vaccineDateLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:hintEnabled="true"
-            app:hintAnimationEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/vaccineDate"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Vaccine Date" />
+                android:text="Vaccine Date"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/updateButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Update" />
-    </LinearLayout>
-
+            <Button
+                android:id="@+id/updateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </ScrollView>

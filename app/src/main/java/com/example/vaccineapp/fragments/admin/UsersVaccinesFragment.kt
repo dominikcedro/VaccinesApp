@@ -1,4 +1,4 @@
-package com.example.vaccineapp.fragments
+package com.example.vaccineapp.fragments.admin
 
 import ListOfUsersViewModel
 import android.R
