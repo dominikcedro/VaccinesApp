@@ -1,28 +1,19 @@
 package com.example.vaccineapp.fragments
 
 import ListOfUsersViewModel
+import android.R
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.vaccineapp.R
-import com.example.vaccineapp.databinding.FragmentAdministeredVaccinationsBinding
-import com.example.vaccineapp.administered_recycler_view.AdministeredVaccinationAdapter
-import com.example.vaccineapp.viewmodel.AdministeredVaccinationViewModel
-import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import androidx.navigation.fragment.findNavController
-import com.example.vaccineapp.databinding.FragmentListOfUsersBinding
 import com.example.vaccineapp.databinding.FragmentUsersVaccinesBinding
+import com.example.vaccineapp.users_vaccines_recycler_view.UsersScheduledVaccinationAdapter
 import com.example.vaccineapp.viewmodel.UserVaccinesViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/**
- * Fragment for displaying all users.
- */
 class UsersVaccinesFragment : Fragment() {
     private val listViewModel: ListOfUsersViewModel by viewModel()
     private val vaccinesViewModel: UserVaccinesViewModel by viewModel()
@@ -43,12 +34,21 @@ class UsersVaccinesFragment : Fragment() {
         listViewModel.fetchUsers()
 
         listViewModel.usersList.observe(viewLifecycleOwner) { users ->
-            val adapter = UserArrayAdapter(requireContext(), users)
+            val adapter = ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line, users.map { it.email })
             binding.userDropdown.setAdapter(adapter)
 
             binding.userDropdown.setOnItemClickListener { _, _, position, _ ->
-                val selectedUserId = users[position].id
-                vaccinesViewModel.fetchScheduledVaccinesForUser(selectedUserId.toLong())
+                val selectedUserId = users[position].id.toLong()
+                vaccinesViewModel.fetchScheduledVaccinesForUser(selectedUserId)
+            }
+        }
+
+        vaccinesViewModel.scheduledVaccines.observe(viewLifecycleOwner) { vaccines ->
+            val recyclerView = binding.scheduledVaccinesRecyclerView
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter = UsersScheduledVaccinationAdapter(vaccines) { vaccine ->
+                // Handle edit button click
+                // You can use findNavController().navigate() to navigate to the edit fragment
             }
         }
     }
