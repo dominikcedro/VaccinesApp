@@ -239,4 +239,14 @@ class HttpService(private val noAuthHttpClient: HttpClient, private val defaultH
         }
         return response.body<List<ScheduledVaccinationGetRequest>>()
     }
+
+    suspend fun getSingleScheduledVaccination(jwtToken: String, vaccineId: Long): ScheduledVaccinationGetRequest {
+        val url = "$usersServiceUrl/vaccination/scheduled/$vaccineId"
+        val response = defaultHttpClient.get(url) {
+            headers {
+                append(HttpHeaders.Authorization, "Bearer $jwtToken")
+            }
+        }
+        return response.body<ScheduledVaccinationGetRequest>()
+    }
 }

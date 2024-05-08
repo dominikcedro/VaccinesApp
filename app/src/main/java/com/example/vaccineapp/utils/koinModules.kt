@@ -15,6 +15,7 @@ import com.example.vaccineapp.auth.ErrorResponse
 import com.example.vaccineapp.viewmodel.AddAdministeredVaccinationViewModel
 import com.example.vaccineapp.viewmodel.AddScheduledVaccinationViewModel
 import com.example.vaccineapp.viewmodel.AdministeredVaccinationViewModel
+import com.example.vaccineapp.viewmodel.EditUserScheduledVaccineViewModel
 import com.example.vaccineapp.viewmodel.MainMenuViewModel
 import com.example.vaccineapp.viewmodel.ScheduledVaccinationViewModel
 import com.example.vaccineapp.viewmodel.SettingsViewModel
@@ -125,5 +126,6 @@ val viewModelModule = module {
     factory { SettingsViewModel(get(), get()) }
     factory { ListOfUsersViewModel(get(), get()) }
     factory { UserVaccinesViewModel(get(), get()) }
+    factory { EditUserScheduledVaccineViewModel(get(), get()) }
 
 }
