@@ -48,35 +48,35 @@ class RegisterFragment : Fragment() {
         binding.etFirstName.addTextChangedListener { text ->
             viewModel.updateFirstName(text.toString())
             if (!viewModel.isFirstNameValid()) {
-                //TODO
+                binding.etFirstName.error = "First name is required"
             }
         }
 
         binding.etLastName.addTextChangedListener { text ->
             viewModel.updateLastName(text.toString())
             if (!viewModel.isLastNameValid()) {
-                //TODO
+                binding.etLastName.error = "Last name is required"
             }
         }
 
         binding.etRegisterEmail.addTextChangedListener { text ->
             viewModel.updateEmail(text.toString())
             if (!viewModel.isEmailValid()) {
-                //TODO
+                binding.etRegisterEmail.error = "Email is required"
             }
         }
 
         binding.etRegisterPass1.addTextChangedListener { text ->
             viewModel.updatePassword(text.toString())
             if (!viewModel.isPasswordValid()) {
-                //TODO
+                binding.etRegisterPass1.error = "Password is required"
             }
         }
 
         binding.etRegisterPass2.addTextChangedListener { text ->
             viewModel.updateConfirmPassword(text.toString())
             if (!viewModel.isConfirmPasswordValid()) {
-                //TODO
+                binding.etRegisterPass2.error = "Password confirmation is required"
             }
         }
 
@@ -92,6 +92,9 @@ class RegisterFragment : Fragment() {
         }
 
         binding.registerButton.setOnClickListener {
+            if (!viewModel.isAllFieldsValid.value!!) {
+                return@setOnClickListener
+            }
             viewModel.register()
             hideKeyboard(it)
         }
@@ -106,11 +109,8 @@ class RegisterFragment : Fragment() {
                 }
 
                 RegisterViewModel.AuthenticationState.AUTHENTICATED -> {
-                    binding.registerButton.isEnabled = true // why???
-                    // TODO snackbar and
                     showSnackBar("Register successful!", false)
-
-                    //  viewModel.updateNotificationToken()????
+                    viewModel.updateNotificationToken()
                     val intent = Intent(requireContext(), MainActivity::class.java)
                     startActivity(intent)
                     activity?.finish()
