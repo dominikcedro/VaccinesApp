@@ -54,8 +54,8 @@ class EditUsersScheduledVaccineFragment : Fragment() {
             vaccineviewmodel.fetchScheduledVaccination(vaccineId)
             vaccineviewmodel.scheduledVaccination.observe(viewLifecycleOwner, Observer { scheduledVaccination ->
                 // Update your views here with the fetched data
-                binding.vaccineName.text = scheduledVaccination?.vaccine?.name
-                binding.vaccineDate.text = scheduledVaccination?.dateTime?.let { formatDate(it) }
+                binding.vaccineName.setText(scheduledVaccination?.vaccine?.name)
+                binding.vaccineDate.setText(scheduledVaccination?.dateTime?.let { formatDate(it) })
 
                 oldVaccineInfo = scheduledVaccination
 

@@ -18,7 +18,7 @@ fun Fragment.showSnackBar(message: String, error: Boolean) {
     snackbar.setTextColor(
         ContextCompat.getColor(
             requireContext(),
-            R.color.white
+            R.color.black
         )
     )
     if (error) {
@@ -27,6 +27,7 @@ fun Fragment.showSnackBar(message: String, error: Boolean) {
                 requireContext(),
                 R.color.snackBarError
             )
+
         )
     } else {
         snackbar.setBackgroundTint(
