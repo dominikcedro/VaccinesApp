@@ -62,21 +62,21 @@ class RegisterFragment : Fragment() {
         binding.etRegisterEmail.addTextChangedListener { text ->
             viewModel.updateEmail(text.toString())
             if (!viewModel.isEmailValid()) {
-                binding.etRegisterEmail.error = "Email is required"
+                binding.etRegisterEmail.error = "Email is not valid"
             }
         }
 
         binding.etRegisterPass1.addTextChangedListener { text ->
             viewModel.updatePassword(text.toString())
             if (!viewModel.isPasswordValid()) {
-                binding.etRegisterPass1.error = "Password is required"
+                binding.etRegisterPass1.error = "Password should have minimum 8 characters, a number and special character"
             }
         }
 
         binding.etRegisterPass2.addTextChangedListener { text ->
             viewModel.updateConfirmPassword(text.toString())
             if (!viewModel.isConfirmPasswordValid()) {
-                binding.etRegisterPass2.error = "Password confirmation is required"
+                binding.etRegisterPass2.error = "Passwords don't match"
             }
         }
 
