@@ -1,12 +1,17 @@
 package com.example.vaccineapp.scheduled_recycler_view
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vaccineapp.R
 import com.example.vaccineapp.domain.ScheduledVaccinationGetRequest
 import com.google.android.material.button.MaterialButton
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 /**
  * Adapter for the recycler view in the ScheduledVaccinationsFragment.
@@ -35,11 +40,12 @@ class ScheduledVaccinationAdapter(private val myDataset: Array<ScheduledVaccinat
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ScheduledViewHolder) {
             holder.vaccineName.text = myDataset[position].vaccine.name
             holder.doseNumber.text = myDataset[position].doseNumber.toString()
-            holder.dateTime.text = myDataset[position].dateTime
+            holder.dateTime.text = formatDate(myDataset[position].dateTime)
         } else if (holder is FloatingButtonViewHolder) {
             holder.floatingButton.setOnClickListener { onFloatingButtonClicked() }
         }
@@ -49,5 +55,14 @@ class ScheduledVaccinationAdapter(private val myDataset: Array<ScheduledVaccinat
 
     class FloatingButtonViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val floatingButton: MaterialButton = view.findViewById(R.id.floatingButton)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun formatDate(date: String): String {
+        val targetFormatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd")
+        val sourceFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ")
+        val zonedDate = ZonedDateTime.parse(date, sourceFormatter)
+        val zonedDateWithSystemOffset = zonedDate.withZoneSameInstant(ZoneId.systemDefault())
+        return zonedDateWithSystemOffset.format(targetFormatter)
     }
 }

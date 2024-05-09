@@ -54,11 +54,8 @@ class EditUsersScheduledVaccineFragment : Fragment() {
             vaccineviewmodel.fetchScheduledVaccination(vaccineId)
             vaccineviewmodel.scheduledVaccination.observe(viewLifecycleOwner, Observer { scheduledVaccination ->
                 // Update your views here with the fetched data
-                binding.vaccineName.setText(scheduledVaccination?.vaccine?.name)
-                val originalFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ")
-                val desiredFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-                val zonedDateTime = ZonedDateTime.parse(scheduledVaccination?.dateTime, originalFormatter)
-                binding.vaccineDate.setText(desiredFormatter.format(zonedDateTime))
+                binding.vaccineName.text = scheduledVaccination?.vaccine?.name
+                binding.vaccineDate.text = scheduledVaccination?.dateTime?.let { formatDate(it) }
 
                 oldVaccineInfo = scheduledVaccination
 
@@ -107,7 +104,8 @@ class EditUsersScheduledVaccineFragment : Fragment() {
                             }
 
                             val formatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd")
-                            binding.vaccineDate.setText(zonedDateTime.format(formatter))
+                            val zonedDateWithSystemOffset = zonedDateTime.withZoneSameInstant(ZoneId.systemDefault())
+                            binding.vaccineDate.setText(zonedDateWithSystemOffset.format(formatter))
                         }
                         timePicker.show(childFragmentManager, "time_picker")
                     }
@@ -115,6 +113,15 @@ class EditUsersScheduledVaccineFragment : Fragment() {
                 datePicker.show(childFragmentManager, "date_picker")
             }
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun formatDate(date: String): String {
+        val targetFormatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd")
+        val sourceFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ")
+        val zonedDate = ZonedDateTime.parse(date, sourceFormatter)
+        val zonedDateWithSystemOffset = zonedDate.withZoneSameInstant(ZoneId.systemDefault())
+        return zonedDateWithSystemOffset.format(targetFormatter)
     }
 
     override fun onDestroyView() {

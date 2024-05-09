@@ -25,4 +25,5 @@ class UsersScheduledVaccinationAdapter(
     }
 
     override fun getItemCount() = vaccines.size
+
 }
