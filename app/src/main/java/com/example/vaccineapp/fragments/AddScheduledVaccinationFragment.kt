@@ -58,7 +58,7 @@ class AddScheduledVaccinationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.clearReminders()
+        viewModel.clearViewModel()
 
         binding.btnSubmit.isEnabled = false
 
