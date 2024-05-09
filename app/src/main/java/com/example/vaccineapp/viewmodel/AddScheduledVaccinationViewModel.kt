@@ -95,6 +95,14 @@ class AddScheduledVaccinationViewModel(private val httpService: HttpService) : V
     }
 
     /**
+     * Clears the reminders.
+     */
+    fun clearViewModel() {
+        doseNumber.value = 1
+        reminders.clear()
+    }
+
+    /**
      * Adds the next dose.
      */
     fun addNextDose(){
