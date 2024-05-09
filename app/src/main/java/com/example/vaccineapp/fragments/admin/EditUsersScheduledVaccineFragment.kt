@@ -55,7 +55,10 @@ class EditUsersScheduledVaccineFragment : Fragment() {
             vaccineviewmodel.scheduledVaccination.observe(viewLifecycleOwner, Observer { scheduledVaccination ->
                 // Update your views here with the fetched data
                 binding.vaccineName.setText(scheduledVaccination?.vaccine?.name)
-                binding.vaccineDate.setText(scheduledVaccination?.dateTime)
+                val originalFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ")
+                val desiredFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                val zonedDateTime = ZonedDateTime.parse(scheduledVaccination?.dateTime, originalFormatter)
+                binding.vaccineDate.setText(desiredFormatter.format(zonedDateTime))
 
                 oldVaccineInfo = scheduledVaccination
 

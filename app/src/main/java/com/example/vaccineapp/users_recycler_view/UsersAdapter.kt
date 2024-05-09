@@ -11,6 +11,7 @@ class UsersAdapter(var users: List<UserDetails>) : RecyclerView.Adapter<UsersAda
     class UserViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val email: TextView = view.findViewById(R.id.email)
         val firstName: TextView = view.findViewById(R.id.firstName)
+        val lastName: TextView = view.findViewById(R.id.lastName)
         val userId: TextView = view.findViewById(R.id.userId)
         val role: TextView = view.findViewById(R.id.userRole)
         // Add other views for the remaining user properties
@@ -25,6 +26,7 @@ class UsersAdapter(var users: List<UserDetails>) : RecyclerView.Adapter<UsersAda
         val user = users[position]
         holder.email.text = user.email
         holder.firstName.text = user.firstName
+        holder.lastName.text = user.lastName
         holder.role.text = user.role
         holder.userId.text = user.id.toString()
         // Set other views with the remaining user properties

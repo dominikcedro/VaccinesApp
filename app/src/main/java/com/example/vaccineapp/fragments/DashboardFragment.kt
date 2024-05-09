@@ -58,17 +58,6 @@ class DashboardFragment : Fragment() {
 
         val clock: TextClock = binding.clock
         clock.format24Hour = "HH:mm"
-
-        val paint = clock.paint
-        val width = paint.measureText(clock.text.toString())
-
-        val textShader: Shader = LinearGradient(0f, 0f, width, clock.textSize, intArrayOf(
-            ContextCompat.getColor(requireContext(), R.color.redAccent),
-            ContextCompat.getColor(requireContext(), R.color.orangeAccent),
-        ), null, Shader.TileMode.CLAMP)
-
-        clock.paint.shader = textShader
-
         return binding.root
     }
 

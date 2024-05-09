@@ -6,7 +6,7 @@
     <item name="windowActionBar">false</item>
     <item name="colorPrimary">@color/DARK_primarycolor</item>
     <item name="colorPrimaryVariant">@color/DARK_darkcolor</item>
-    <item name="colorOnPrimary">@color/white</item>
+    <item name="colorOnPrimary">@color/DARK_primarycolor</item>
     <!-- Secondary brand color. -->
     <item name="colorSecondary">@color/red</item>
     <item name="colorSecondaryVariant">@color/red</item>

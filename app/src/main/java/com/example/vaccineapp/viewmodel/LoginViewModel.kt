@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vaccineapp.auth.AuthenticationRequest
+import com.example.vaccineapp.domain.UserDetails
 import com.example.vaccineapp.service.TokenManager
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
@@ -19,15 +20,16 @@ import kotlinx.coroutines.runBlocking
  * @property httpService The HTTP service for making network requests.
  */
 class LoginViewModel(private val tokenManager: TokenManager, private val httpService: HttpService) : ViewModel() {
-    private val email = MutableLiveData<String>("")
-    private val password = MutableLiveData<String>("")
+    private val email = MutableLiveData<String?>("")
+    private val password = MutableLiveData<String?>("")
     val exceptionMessage = MutableLiveData<String>()
+
 
 
     /**
      * Represents the authentication state.
      */
-    val authenticationState = MutableLiveData<AuthenticationState>()
+    val authenticationState = MutableLiveData<AuthenticationState?>()
 
     /**
      * Enum class for representing the authentication state.
@@ -103,4 +105,5 @@ class LoginViewModel(private val tokenManager: TokenManager, private val httpSer
     fun isUserLoggedIn(): Boolean {
         return !tokenManager.isRefreshTokenExpired();
     }
+
 }
