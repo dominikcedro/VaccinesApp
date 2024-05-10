@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import com.example.vaccineapp.R
 import com.example.vaccineapp.databinding.FragmentEditUsersScheduledVaccineBinding
 import com.example.vaccineapp.domain.ScheduledVaccinationGetRequest
@@ -60,6 +61,10 @@ class EditUsersScheduledVaccineFragment : Fragment() {
                 oldVaccineInfo = scheduledVaccination
 
             })
+
+            binding.updateButton.setOnClickListener {
+                findNavController().navigate(R.id.action_editUsersScheduledVaccineFragment_to_adminDashboardFragment)
+            }
             binding.vaccineDate.setOnClickListener {
                 val datePickerBuilder = MaterialDatePicker.Builder.datePicker()
                 val constraintsBuilder = CalendarConstraints.Builder()
