@@ -61,9 +61,7 @@ class SettingsFragment : Fragment() {
         viewModel.logoutStatus.observe(viewLifecycleOwner) { isLoggedOut ->
             if (isLoggedOut) {
                 showSnackBar("Logout successful", false)
-                val intent = Intent(activity, StartActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+                activity?.finish()
             } else {
                 showSnackBar("Logout failed", true)
             }
